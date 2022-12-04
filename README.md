@@ -1,5 +1,5 @@
-# ROS2-Raspberry-PI-Intelligent-Vision-Robot
-Curs ROS2
+# ROS2-rUBot project
+Contains a ROS2 tutorial and rUBot project
 
 ## Create the package
 Follow the instructions:
