@@ -1,6 +1,6 @@
 from setuptools import setup
 
-package_name = 'vision_rpi_bot'
+package_name = 'ros2_tutorial'
 
 setup(
     name=package_name,
@@ -13,7 +13,7 @@ setup(
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='mpuig',
+    maintainer='HP',
     maintainer_email='manel.puig@ub.edu',
     description='TODO: Package description',
     license='TODO: License declaration',

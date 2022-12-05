@@ -10,12 +10,13 @@ The main differences are:
 ROS2 is a very good choice.
 
 Interesting references for courses:
-- https://www.udemy.com/course/ros2-for-beginners/learn/lecture/20260476#overview
+- Edouard Renard: https://www.udemy.com/course/ros2-for-beginners/learn/lecture/20260476#overview
 - https://www.udemy.com/course/learn-ros2-as-a-ros1-developer-and-migrate-your-ros-projects/learn/lecture/22003074#overview
 - https://www.udemy.com/course/ros2-ultimate-mobile-robotics-course-for-beginners-opencv/learn/lecture/28143024#overview
 - https://www.udemy.com/course/ros2-self-driving-car-with-deep-learning-and-computer-vision/learn/lecture/28236852#overview
 
 Some interesting projects:
+- https://github.com/noshluk2/ROS2-Raspberry-PI-Intelligent-Vision-Robot
 - https://github.com/noshluk2/ROS2-Ultimate-Mobile-Robotics-Course-for-Beginners-OpenCV
 - https://github.com/noshluk2/ROS2-Self-Driving-Car-AI-using-OpenCV
 
@@ -76,8 +77,30 @@ choco install graphviz
 
 ## 2. **Create workspace**
 
+You can create a workspace with your desired name (usually finished with ws), for exemple "ROS2_rUBot_ws". Add a subfolder "src" where you will place the packages.
+
+Proper documentation in: https://docs.ros.org/en/foxy/Tutorials/Beginner-CLI-Tools/Configuring-ROS2-Environment.html#
+
+**a) In Ubuntu:**
+
 To work with ROS2 first open your ~/.bashrc and be sure you have sourced ROS2 adding the lines:
 - source /opt/ros/foxy/setup.bash
 - source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
+
+**b) In Windows:**
+
+In command line add "&& c:\opt\ros\foxy\x64\setup.bat"
+
+## 3. **Create first package**
+You can create your first package inside the src folder with a name "ros2_tutorial"
+```shell
+ros2 pkg create --build-type ament_python ros2_tutorial
+cd ..
+colcon build --merge-install
+```
+Source the ws:
+- in Ubuntu: "source ~/Desktop/ros2_rUBot_ws/devel/setup.bash"
+
+- In Windows add in command line: "&& call install/local_setup.bat"
 
 Create your first Package: https://docs.ros.org/en/foxy/Tutorials/Creating-Your-First-ROS2-Package.html
