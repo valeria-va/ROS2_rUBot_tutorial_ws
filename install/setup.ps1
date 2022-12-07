@@ -24,6 +24,7 @@ function _colcon_prefix_chain_powershell_source_script {
 # source chained prefixes
 _colcon_prefix_chain_powershell_source_script "c:\opt\ros\foxy\x64\local_setup.ps1"
 _colcon_prefix_chain_powershell_source_script "c:\opt\ros\foxy\x64\\local_setup.ps1"
+_colcon_prefix_chain_powershell_source_script "C:\Users\HP\OneDrive\Escritorio\ROS_github\ROS2-rUBot_ws\install\\local_setup.ps1"
 
 # source this prefix
 $env:COLCON_CURRENT_PREFIX=(Split-Path $PSCommandPath -Parent)

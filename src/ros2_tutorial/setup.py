@@ -20,6 +20,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+                'publisher_node = ros2_tutorial.publisher_hello:main',
+                'subscriber_node = ros2_tutorial.subscriber_hello:main',
         ],
     },
 )

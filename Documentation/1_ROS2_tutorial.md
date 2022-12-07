@@ -98,9 +98,44 @@ ros2 pkg create --build-type ament_python ros2_tutorial
 cd ..
 colcon build --merge-install
 ```
+> If colcon is not installed:
+> - In Ubuntu: sudo apt install python3-colcon-common-extensions
+> - In windows: pip install -U colcon-common-extensions
+
 Source the ws:
 - in Ubuntu: "source ~/Desktop/ros2_rUBot_ws/devel/setup.bash"
 
-- In Windows add in command line: "&& call install/local_setup.bat"
+- In Windows add in command line: "&& install\local_setup.bat"
 
 Create your first Package: https://docs.ros.org/en/foxy/Tutorials/Creating-Your-First-ROS2-Package.html
+
+## 4. **Create first Publisher and Subscriber nodes**
+You can create your first Publisher and Subscriber using some templates.
+- Create files "publisher_hello,py" and "subscriber_hello.py"
+- Add entry points for Publisher and Subscriber
+    
+    Reopen setup.py and add the entry point for the subscriber node below the publisher’s entry point. The entry_points field should now look like this:
+    ```python
+    entry_points={
+        'console_scripts': [
+                'publisher_node = ros2_tutorial.publisher_hello:main',
+                'subscriber_node = ros2_tutorial.subscriber_hello:main',
+        ],
+    },
+    ```
+- Compile inside ws: 
+    ```shell
+    colcon build --merge-install
+    ```
+- Run:
+    ```shell
+    ros2 run ros2_tutorial publisher_node
+    ros2 run ros2_tutorial subscriber_node
+    ```
+
+
+Create your first Publisher and Subscriber nodes: https://docs.ros.org/en/foxy/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Py-Publisher-And-Subscriber.html
+
+## 5. **Using parameters in a Class**
+
+Detailed tutorial in: https://docs.ros.org/en/foxy/Tutorials/Beginner-Client-Libraries/Using-Parameters-In-A-Class-Python.html
