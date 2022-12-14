@@ -28,6 +28,8 @@ And the ROS2 reference sites:
 Installation could be in:
 - Ubuntu 20
 - windows
+
+This installation could be made using Docker tool
 ## **a) ROS2 in Ubuntu20**
 Follow instructions in:
 https://docs.ros.org/en/foxy/Installation/Ubuntu-Install-Debians.html
@@ -74,7 +76,14 @@ Complete the installation dependencies:
 python -m pip install -U pydot PyQt5
 choco install graphviz
 ```
+## **c) ROS2 in windows using Docker tool**
+First you need to install Docker:
+- https://docs.docker.com/get-docker/
+In windows:
+- https://docs.docker.com/desktop/install/windows-install/
+Then you have to complete your installation with WSL 2 for kernell update in: https://learn.microsoft.com/ca-es/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package
 
+- restart your comput
 ## 2. **Create workspace**
 
 You can create a workspace with your desired name (usually finished with ws), for exemple "ROS2_rUBot_ws". Add a subfolder "src" where you will place the packages.
