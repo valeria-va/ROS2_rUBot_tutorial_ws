@@ -31,7 +31,26 @@ Installation could be in:
 
 This installation could be made using Docker tool
 ## **a) ROS2 in Ubuntu20**
-Follow instructions in:
+You could have Ubuntu installed:
+- In a computer with Ubuntu 20
+- Using VirtualBox to create a virtual machine
+- with Windows Ubunt terminal: downloaded from Microsoft Store 
+
+In this last case you will need to update:
+```shell
+sudo apt update
+sudo apt upgrade
+sudo apt install gedit
+```
+Install VcXsrv Windows X Server to manage emerging windows: https://sourceforge.net/projects/vcxsrv/
+
+Define the DISPLY env variable:
+```shell
+export DISPLAY=:0.0
+xhost +
+```
+
+To properly install ROS2, follow instructions in:
 https://docs.ros.org/en/foxy/Installation/Ubuntu-Install-Debians.html
 
 Some other installations needed:
@@ -46,7 +65,14 @@ pip3 install argcomplete
 sudo apt install python3-colcon-common-extensions
 ```
 > To use autocompletion you need to add in ~/.bashrc file this line:
+>- source /opt/ros/foxy/setup.bash
 >- source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
+>type:
+```shell
+ echo "source /opt/ros/foxy/setup.bash" >> ~/.bashrc
+ echo "source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash" >> ~/.bashrc
+ ```
+
 - Visual Studio Code with some extensions:
     - python 
     - python for VS Code
@@ -92,7 +118,14 @@ In windows:
 - restart your computer
 
 Then you can download a container with ROS-Noetic-Desktop-full:
-- ros
+- In search item on top menu, type: ROS-Noetic-Desktop-full
+
+## **d) USB Image tool**
+This software will be used to create an image of SD card to share and copy to another SD card.
+- Download the SW from: 
+https://www.alexpage.de/usb-image-tool/download/
+
+
 ## 2. **Create workspace**
 
 You can create a workspace with your desired name (usually finished with ws), for exemple "ROS2_rUBot_ws". Add a subfolder "src" where you will place the packages.
