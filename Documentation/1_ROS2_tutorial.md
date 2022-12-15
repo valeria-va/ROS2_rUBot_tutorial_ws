@@ -83,8 +83,12 @@ First you need to install Docker:
 In windows:
 - https://docs.docker.com/desktop/install/windows-install/
 
-Then you have to complete your installation with WSL 2 for kernell update in: https://learn.microsoft.com/ca-es/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package
+    >   Open PowerShell terminal and type: systeminfo | find "Tipo de sistema"
+    >
+    >   The outout has to be: x64-based PC
 
+- Then you have to complete your installation with WSL 2 for kernell update in: https://learn.microsoft.com/ca-es/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package
+- Stablish WSL2 as default by opening a powershell and typing: wsl --set-default-version 2
 - restart your computer
 
 Then you can download a container with ROS-Noetic-Desktop-full:
