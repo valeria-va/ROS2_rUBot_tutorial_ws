@@ -120,6 +120,14 @@ In windows:
 Then you can download a container with ROS-Noetic-Desktop-full:
 - In search item on top menu, type: ROS-Noetic-Desktop-full
 
+- Install VcXsrv Windows X Server to manage emerging windows: https://sourceforge.net/projects/vcxsrv/
+
+- Define the DISPLAY env variable with the IP address of the vEthernet (WSL) adapter (optained in a power Shell with ipconfig):
+    ```shell
+    export DISPLAY=:0.0
+    xhost +172.20.48.1
+    ```
+
 ## **d) USB Image tool**
 This software will be used to create an image of SD card to share and copy to another SD card.
 - Download the SW from: 
