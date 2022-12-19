@@ -34,46 +34,55 @@ This installation could be made using Docker tool
 You could have Ubuntu installed:
 - In a computer with Ubuntu 20
 - Using VirtualBox to create a virtual machine
-- with Windows Ubunt terminal: downloaded from Microsoft Store 
+- with Windows Ubuntu terminal: downloaded from Microsoft Store 
 
-In this last case you will need to update:
-```shell
-sudo apt update
-sudo apt upgrade
-sudo apt install gedit
-```
-Install VcXsrv Windows X Server to manage emerging windows: https://sourceforge.net/projects/vcxsrv/
+In this last case you will need to:
+- Download Ubuntu 20.04 from Microsoft Store 
+- Install WSL2 (Windows Subsystem for Linux) following indications
+- verify if WSL2 is working (open Power Shell)
+    ```shell
+    wsl -l -v
+    wsl --set-version Ubuntu-20.04 
+    ```
+-  update Ubuntu 20 (open Ubuntu terminal):
+    ```shell
+    sudo apt update
+    sudo apt upgrade
+    sudo apt install gedit
+    ```
+- Install VcXsrv Windows X Server to manage emerging windows: https://sourceforge.net/projects/vcxsrv/
 
-Define the DISPLY env variable:
-```shell
-export DISPLAY=:0.0
-xhost +
-```
+- Define the DISPLY env variable:
+    ```shell
+    export DISPLAY=:0.0
+    xhost +
+    ```
 
-To properly install ROS2, follow instructions in:
+- To properly install ROS2, follow instructions in:
 https://docs.ros.org/en/foxy/Installation/Ubuntu-Install-Debians.html
 
 Some other installations needed:
 - python3 pip
-```shell
-sudo apt install python3-pip
-pip3 install argcomplete
-```
-> needed for autoformating (press crtl+shift+i)
+    ```shell
+    sudo apt install python3-pip
+    pip3 install argcomplete
+    ```
+    > needed for autoformating (press crtl+shift+i)
 - Colcon compilation utility (https://docs.ros.org/en/foxy/Tutorials/Colcon-Tutorial.html)
-```shell
-sudo apt install python3-colcon-common-extensions
-```
-> To use autocompletion you need to add in ~/.bashrc file this line:
->- source /opt/ros/foxy/setup.bash
->- source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
->type:
-```shell
- echo "source /opt/ros/foxy/setup.bash" >> ~/.bashrc
- echo "source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash" >> ~/.bashrc
- ```
+    ```shell
+    sudo apt install python3-colcon-common-extensions
+    ```
+    > To use autocompletion you need to add in ~/.bashrc file this line:
+    >- source /opt/ros/foxy/setup.bash
+    >- source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
+    >
+    >type:
+    ```shell
+    echo "source /opt/ros/foxy/setup.bash" >> ~/.bashrc
+    echo "source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash" >> ~/.bashrc
+    ```
 
-- Visual Studio Code with some extensions:
+- In Visual Studio Code add some extensions:
     - python 
     - python for VS Code
     - python Intellisense
@@ -84,14 +93,14 @@ sudo apt install python3-colcon-common-extensions
     - C/C++
     - cmake
 
-- Terminator (https://cheatography.com/svschannak/cheat-sheets/terminator-ubuntu/):
-```shell
-sudo apt install terminator
-```
-Finally you have to reboot:
-```shell
-sudo reboot
-```
+- Install Terminator (https://cheatography.com/svschannak/cheat-sheets/terminator-ubuntu/):
+    ```shell
+    sudo apt install terminator
+    ```
+- Finally you have to reboot:
+    ```shell
+    sudo reboot
+    ```
 
 ## **b) ROS2 in windows**
 Follow instructions in:
