@@ -37,22 +37,24 @@ You could have Ubuntu installed:
 - with Windows Ubuntu terminal: downloaded from Microsoft Store 
 
 In this last case you will need to:
-- Download Ubuntu 20.04 from Microsoft Store 
-- Install WSL2 (Windows Subsystem for Linux) following indications
-- verify if WSL2 is working (open Power Shell)
+- Update the windows and all drivers. Restart 2-3 times
+- Download Ubuntu 20.04 from Microsoft Store. Run as administrator. Specify user and password
+- Verify if WSL2 is installed and working with wsl2 version (open Power Shell)
     ```shell
     wsl -l -v
-    wsl --set-version Ubuntu-20.04 
+    wsl --set-version Ubuntu-20.04 2
     ```
 -  update Ubuntu 20 (open Ubuntu terminal):
     ```shell
     sudo apt update
     sudo apt upgrade
+    sudo apt install python3-pip
+    python3 -m pip install -U pydot PyQt5
     sudo apt install gedit
     ```
 - Install VcXsrv Windows X Server to manage emerging windows: https://sourceforge.net/projects/vcxsrv/
 
-- Define the DISPLY env variable:
+- Define the DISPLAY env variable:
     ```shell
     export DISPLAY=:0.0
     xhost +
@@ -120,7 +122,7 @@ In windows:
 
     >   Open PowerShell terminal and type: systeminfo | find "Tipo de sistema"
     >
-    >   The outout has to be: x64-based PC
+    >   The output has to be: x64-based PC
 
 - Then you have to complete your installation with WSL 2 for kernell update in: https://learn.microsoft.com/ca-es/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package
 - Stablish WSL2 as default by opening a powershell and typing: wsl --set-default-version 2
