@@ -25,7 +25,7 @@ And the ROS2 reference sites:
 - https://docs.ros.org/en/foxy/
 
 ## 1. **ROS2 Installation & Tools**
-Installation will be made using Docker for windows:
+Installation will be made using Docker:
 
 - https://docs.docker.com/get-docker/
 
@@ -41,16 +41,16 @@ In windows:
 - restart your computer
 
 The usefull images you can install are:
-- ROS_Noetic:
-- ROS2_Foxy:
+- ROS_Noetic: arvinskushwaha/ros-noetic-desktop-vnc:latest
+- ROS2_Foxy: riel0327/ros2-foxy-desktop:foxy
 
 Some important trics:
 - To copy and paste text use the clipboard
 - For home symbol use the "Extra keys"
 - To copy files or folders from/to windows, open a Power Shell terminal and type:
 ```shell
-docker cp c:/road1 Ros1_Noetic:/home/ubuntu
-docker cp Ros1_Noetic:/home/ubuntu/rUBot_mecanum_ws/src/rubot_mecanum_description/worlds/road1.world c:/
+docker cp c:/Users/puigm/Desktop/road1 Ros1_Noetic:/home/ubuntu/rUBot_mecanum_ws/src/rubot_mecanum_description/models
+docker cp Ros1_Noetic:/home/ubuntu/rUBot_mecanum_ws/src/rubot_mecanum_description/worlds/road1.world c:/Users/puigm/Desktop
 ```
 
 For HW image recording we will use "USB Image Tool".
