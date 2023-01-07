@@ -63,17 +63,14 @@ https://www.alexpage.de/usb-image-tool/download/
 
 You can create a workspace with your desired name (usually finished with ws), for exemple "ROS2_rUBot_ws". Add a subfolder "src" where you will place the packages.
 
+Usually you will clone a repositoty:
+```shell
+git clone https://github.com/manelpuig/ROS2_rUBot_ws
+```
+
 Proper documentation in: https://docs.ros.org/en/foxy/Tutorials/Beginner-CLI-Tools/Configuring-ROS2-Environment.html#
 
-**a) In Ubuntu:**
 
-To work with ROS2 first open your ~/.bashrc and be sure you have sourced ROS2 adding the lines:
-- source /opt/ros/foxy/setup.bash
-- source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
-
-**b) In Windows:**
-
-In command line add "&& c:\opt\ros\foxy\x64\setup.bat"
 
 ## 3. **Create first package**
 You can create your first package inside the src folder with a name "ros2_tutorial"
@@ -83,13 +80,16 @@ cd ..
 colcon build --merge-install
 ```
 > If colcon is not installed:
-> - In Ubuntu: sudo apt install python3-colcon-common-extensions
-> - In windows: pip install -U colcon-common-extensions
+> - sudo apt install python3-colcon-common-extensions
+>
 
-Source the ws:
-- in Ubuntu: "source ~/Desktop/ros2_rUBot_ws/devel/setup.bash"
-
-- In Windows add in command line: "&& install\local_setup.bat"
+Source the ws. Be sure in .bashrc file to have:
+```shell
+source /opt/ros/foxy/setup.bash 
+source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
+cd /home/ubuntu/ROS2_rUBot_ws
+source /home/ubuntu/ROS2_rUBot_ws/install/setup.bash
+```
 
 Create your first Package: https://docs.ros.org/en/foxy/Tutorials/Creating-Your-First-ROS2-Package.html
 
