@@ -123,3 +123,31 @@ Create your first Publisher and Subscriber nodes: https://docs.ros.org/en/foxy/T
 ## 5. **Using parameters in a Class**
 
 Detailed tutorial in: https://docs.ros.org/en/foxy/Tutorials/Beginner-Client-Libraries/Using-Parameters-In-A-Class-Python.html
+
+## 6. **Create Launch files**
+
+Detailed
+
+## 7. **Githuib sync from docker**
+
+When finished, **syncronize** the changes with your github. 
+- Open a terminal in your local repository and type the first time:
+```shell
+git config --global user.email mail@alumnes.ub.edu
+git config --global user.name 'your github username'
+git config --global credential.helper store
+```
+- for succesive times, you only need to do:
+```shell
+git add -A
+git commit -a -m 'message'
+git push
+```
+- you will need to insert the username and the saved PAT password
+- syncronize your repository several times to save your work in your github account
+> - You can **update** your repository either in your local or **remote repository**:
+>   - Local: with the previous instructions
+>   - Remote: using web-based Visual Studio Code:
+>       - pressing "·" key
+>       - performing repository modifications
+>       - typing "**git pull**" to syncronize
