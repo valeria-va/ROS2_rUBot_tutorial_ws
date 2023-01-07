@@ -1,4 +1,4 @@
-# **Migration to ROS2**
+# **ROS2 tutorial**
 
 ROS1 is close to finish and you can switch to ROS2
 ![](./Images/7_ROS2_time.png)
@@ -24,27 +24,97 @@ And the ROS2 reference sites:
 - https://docs.ros.org/
 - https://docs.ros.org/en/foxy/
 
-## 1. **ROS2 Installation & Tools**
-Installation will be made using Docker:
+Installation will be made using Docker
 
+## **1. Docker Installation & Tools**
+We will learn:
+- Installation
+- Starting docker ROS official images
+
+### **1.1 ROS2 Installation**
+Installation instructions could be found in:
+- http://wiki.ros.org/docker
 - https://docs.docker.com/get-docker/
 
 In windows:
-- https://docs.docker.com/desktop/install/windows-install/
+- download and install: https://docs.docker.com/desktop/install/windows-install/
 
     >   Open PowerShell terminal and type: systeminfo | find "Tipo de sistema"
     >
     >   The output has to be: x64-based PC
-
+- restart your computer
+- Open Docker Desktop
 - Then you have to complete your installation with WSL 2 for kernell update in: https://learn.microsoft.com/ca-es/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package
 - Stablish WSL2 as default by opening a powershell and typing: wsl --set-default-version 2
-- restart your computer
+You need also to install Xlaunch for windows for GUI:
+- https://sourceforge.net/projects/vcxsrv/
 
-The usefull images you can install are:
-- ROS_Noetic: arvinskushwaha/ros-noetic-desktop-vnc:latest
-- ROS2_Foxy: riel0327/ros2-foxy-desktop:foxy
+### **1.2 Starting docker ROS official images**
+The official images are mantained by Open Source Robotics Foundation (OSRF).
 
-Some important trics:
+You can find them in:
+- https://registry.hub.docker.com/_/ros/
+- https://hub.docker.com/r/osrf/ros/tags
+
+Usefull images that could be opened with browser:
+- ROS_Noetic: https://hub.docker.com/r/arvinskushwaha/ros-noetic-desktop-vnc/tags
+- ROS2_Foxy: https://hub.docker.com/r/husarion/ros2-desktop-vnc
+
+Interesting information is in:
+- https://github.com/noshluk2/ros1_wiki/tree/main/docker
+
+Let's install ROS1 and 2 official image:
+```shell
+docker pull osrf/ros:noetic-desktop-full
+docker pull osrf/ros:foxy-desktop
+```
+To see all the images installed:
+```shell
+docker images -a
+```
+Creating a interactive container from image
+```shell
+docker run -it osrf/ros:noetic-desktop-full
+```
+Giving Name to a container while creating
+```shell
+docker run --name ROS1_Noetic_osrf -it osrf/ros:noetic-desktop-full
+```
+List of containers:
+```shell
+docker ps
+```
+Connect shell to running container
+```shell
+docker exec -it (container_id) bash
+```
+Source shell:
+```shell
+source /opt/ros/noetic/setup.bash
+```
+Start listener
+```shell
+rosrun rospy_tutorials listener
+```
+Start talker
+```shell
+rosrun rospy_tutorials talker
+```
+Stop  containers
+```shell
+docker kill 9a9b8eeaee46
+```
+Running a container with GUI enabled for Windows
+```shell
+docker run --name ROS1_Noetic_osrf -e DISPLAY=host.docker.internal:0.0 -it osrf/ros:noetic-desktop-full
+```
+Start a GUI
+```shell
+source /opt/ros/noetic/setup.bash
+rosrun turtlesim turtlesim_node
+```
+
+**Some important trics:**
 - To copy and paste text use the clipboard
 - For home symbol use the "Extra keys"
 - To copy files or folders from/to windows, open a Power Shell terminal and type:
