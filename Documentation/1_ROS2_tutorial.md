@@ -34,6 +34,7 @@ We will learn:
 ### **1.1 ROS2 Installation**
 Installation instructions could be found in:
 - http://wiki.ros.org/docker
+- http://wiki.ros.org/docker/Tutorials/Docker
 - https://docs.docker.com/get-docker/
 
 In windows:
