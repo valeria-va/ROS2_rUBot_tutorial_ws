@@ -138,6 +138,7 @@ Then create a new "Dockerfile" with the image configuration:
 FROM osrf/ros:foxy-desktop
 
 RUN apt-get update
+RUN 
 RUN apt-get install -y git && apt-get install -y python3-pip
 RUN cd ~/
 RUN git clone https://github.com/manelpuig/ROS2_rUBot_ws && \
@@ -153,9 +154,23 @@ The Dockerfile is a text file that will produce a Docker Image
 
 Run the image:
 ```shell
-docker run --name ROS2_Foxy_osrf -it ros2_foxy_mpuig:latest
+docker run --name ROS2_mpuig -e DISPLAY=host.docker.internal:0.0 -it ros2_foxy_mpuig:latest
 ```
-### **1.6. Githuib sync from docker**
+Start another terminal in the same container ID and open turtlesim node.
+```shell
+docker exec -it (container_id) bash
+```
+Open terminator
+```shell
+terminator
+```
+In terminator terminal type:
+```shell
+source /opt/ros/foxy/setup.bash
+ros2 run turtlesim turtlesim_node
+```
+
+### **1.6. Github sync from docker**
 
 When finished, **syncronize** the changes with your github. 
 - Open a terminal in your local repository and type the first time:
