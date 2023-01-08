@@ -9,7 +9,15 @@ Interesting project to take into account:
 
 ### **3.1. ROS2 environment in RaspberryPi4**
 The objectives of this section are:
-- 
+- Install Ubuntu 20
+- Install ROS2 Foxy
+- Install Hotspot
+
+
+For HW image recording we will use "USB Image Tool".
+This software will be used to create an image of SD card to share and copy to another SD card.
+- Download the SW from: 
+https://www.alexpage.de/usb-image-tool/download/
 
 ### **3.2. ROS2 rUBot bringup**
 The objectives of this section are:

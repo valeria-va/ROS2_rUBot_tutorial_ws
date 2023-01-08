@@ -26,122 +26,27 @@ And the ROS2 reference sites:
 
 Installation will be made using Docker
 
-## **1. Docker Installation & Tools**
-We will learn:
-- Installation
-- Starting docker ROS official images
+## **1. Clone a starting workspace**
+We wil use the "ROS2_rUBot_ws" as starting workspace for this project.
 
-### **1.1 ROS2 Installation**
-Installation instructions could be found in:
-- http://wiki.ros.org/docker
-- http://wiki.ros.org/docker/Tutorials/Docker
-- https://docs.docker.com/get-docker/
-
-In windows:
-- download and install: https://docs.docker.com/desktop/install/windows-install/
-
-    >   Open PowerShell terminal and type: systeminfo | find "Tipo de sistema"
-    >
-    >   The output has to be: x64-based PC
-- restart your computer
-- Open Docker Desktop
-- Then you have to complete your installation with WSL 2 for kernell update in: https://learn.microsoft.com/ca-es/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package
-- Stablish WSL2 as default by opening a powershell and typing: wsl --set-default-version 2
-You need also to install Xlaunch for windows for GUI:
-- https://sourceforge.net/projects/vcxsrv/
-
-### **1.2 Starting docker ROS official images**
-The official images are mantained by Open Source Robotics Foundation (OSRF).
-
-You can find them in:
-- https://registry.hub.docker.com/_/ros/
-- https://hub.docker.com/r/osrf/ros/tags
-
-Usefull images that could be opened with browser:
-- ROS_Noetic: https://hub.docker.com/r/arvinskushwaha/ros-noetic-desktop-vnc/tags
-- ROS2_Foxy: https://hub.docker.com/r/husarion/ros2-desktop-vnc
-
-Interesting information is in:
-- https://github.com/noshluk2/ros1_wiki/tree/main/docker
-
-Let's install ROS1 and 2 official image:
+Run a Container:
 ```shell
-docker pull osrf/ros:noetic-desktop-full
-docker pull osrf/ros:foxy-desktop
+docker run --name ROS2_Foxy_osrf -it osrf/ros:foxy-desktop
+git clone https://github.com/manelpuig/ROS2_rUBot_ws
 ```
-To see all the images installed:
-```shell
-docker images -a
-```
-Creating a interactive container from image
-```shell
-docker run -it osrf/ros:noetic-desktop-full
-```
-Giving Name to a container while creating
-```shell
-docker run --name ROS1_Noetic_osrf -it osrf/ros:noetic-desktop-full
-```
-List of containers:
-```shell
-docker ps
-```
-Connect shell to running container
-```shell
-docker exec -it (container_id) bash
-```
-Source shell:
-```shell
-source /opt/ros/noetic/setup.bash
-```
-Start listener
-```shell
-rosrun rospy_tutorials listener
-```
-Start talker
-```shell
-rosrun rospy_tutorials talker
-```
-Stop  containers
-```shell
-docker kill 9a9b8eeaee46
-```
-Running a container with GUI enabled for Windows
-```shell
-docker run --name ROS1_Noetic_osrf -e DISPLAY=host.docker.internal:0.0 -it osrf/ros:noetic-desktop-full
-```
-Start a GUI
-```shell
-source /opt/ros/noetic/setup.bash
-rosrun turtlesim turtlesim_node
-```
-
-**Some important trics:**
-- To copy and paste text use the clipboard
-- For home symbol use the "Extra keys"
-- To copy files or folders from/to windows, open a Power Shell terminal and type:
-```shell
-docker cp c:/Users/puigm/Desktop/road1 Ros1_Noetic:/home/ubuntu/rUBot_mecanum_ws/src/rubot_mecanum_description/models
-docker cp Ros1_Noetic:/home/ubuntu/rUBot_mecanum_ws/src/rubot_mecanum_description/worlds/road1.world c:/Users/puigm/Desktop
-```
-
-For HW image recording we will use "USB Image Tool".
-This software will be used to create an image of SD card to share and copy to another SD card.
-- Download the SW from: 
-https://www.alexpage.de/usb-image-tool/download/
-
+If you want to creat
 
 ## 2. **Create workspace**
 
-You can create a workspace with your desired name (usually finished with ws), for exemple "ROS2_rUBot_ws". Add a subfolder "src" where you will place the packages.
+You can create a workspace in your github account with your desired name (usually finished with ws), for exemple "ROS2_rUBot_ws". Add a subfolder "src" where you will place the packages.
 
-Usually you will clone a repositoty:
+Usually you will clone this created ws in a docker container:
 ```shell
+docker run --name ROS2_Foxy_osrf -it osrf/ros:foxy-desktop
 git clone https://github.com/manelpuig/ROS2_rUBot_ws
 ```
 
 Proper documentation in: https://docs.ros.org/en/foxy/Tutorials/Beginner-CLI-Tools/Configuring-ROS2-Environment.html#
-
-
 
 ## 3. **Create first package**
 You can create your first package inside the src folder with a name "ros2_tutorial"
