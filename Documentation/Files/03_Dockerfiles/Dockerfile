@@ -12,7 +12,10 @@ RUN apt install -y gedit
 RUN apt install -y gedit-plugins
 RUN echo "gedit Installed"
 RUN apt install nautilus -y
-RUN echo "File manager Installed"
+RUN apt install python-nautilus -y
+#RUN pip3 install --user nautilus-open-any-terminal
+RUN apt install gnome-terminal -y
+RUN echo "Nautilus File manager Installed"
 
 RUN mkdir -p /home/ROS2_rUBot_ws/
 
