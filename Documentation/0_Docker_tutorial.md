@@ -194,13 +194,3 @@ git push
 >       - performing repository modifications
 >       - typing "**git pull**" to syncronize
 
-You can also use GitHub Desktop on ubuntu:
-- Download GitHub Desktop
-```shell
-apt install wget
-sudo wget https://github.com/shiftkey/desktop/releases/download/release-2.8.1-linux2/GitHubDesktop-linux-2.8.1-linux2.deb
-sudo dpkg -i GitHubDesktop-linux-2.8.1-linux2.deb
-sudo apt-get install gdebi-core
-sudo gdebi GitHubDesktop-linux-2.8.1-linux2.deb
-```
-- 
