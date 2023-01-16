@@ -111,7 +111,7 @@ Running a container with GUI enabled for Windows. We need to create an environme
 
 We need to open XLaunch program and specify the DIPLAY 0. Then run a Docker with this environment:
 ```shell
-docker run --name ROS1_Noetic_osrf -e DISPLAY=host.docker.internal:0.0 -it osrf/ros:noetic-desktop-full
+docker run --name ROS2_Foxy_osrf -e DISPLAY=host.docker.internal:0.0 -it osrf/ros:foxy-desktop
 ```
 Run the Master
 ```shell
@@ -138,11 +138,17 @@ Then create a new "Dockerfile" with the image configuration:
 FROM osrf/ros:foxy-desktop
 
 RUN apt-get update
-RUN 
 RUN apt-get install -y git && apt-get install -y python3-pip
-RUN cd ~/
-RUN git clone https://github.com/manelpuig/ROS2_rUBot_ws && \
-    cd ~/ROS2_rUBot_ws
+RUN echo "git and pip Installed"
+RUN apt install -y gedit
+RUN apt install -y gedit-plugins
+RUN echo "gedit Installed"
+RUN apt install nautilus -y
+RUN apt install gnome-terminal -y
+RUN sudo apt install nautilus-actions gnome-terminal -y
+RUN echo "Nautilus File manager Installed"
+
+RUN cd /home/
 
 RUN echo "ALL Done"
 ```
