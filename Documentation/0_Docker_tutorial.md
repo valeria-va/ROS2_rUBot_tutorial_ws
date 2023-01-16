@@ -168,9 +168,9 @@ docker exec -it (container_id) bash
 ```
 Open terminator
 ```shell
-terminator
+nautilus
 ```
-In terminator terminal type:
+In terminal type:
 ```shell
 source /opt/ros/foxy/setup.bash
 ros2 run turtlesim turtlesim_node
