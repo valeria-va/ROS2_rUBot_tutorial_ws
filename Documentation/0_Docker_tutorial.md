@@ -137,7 +137,9 @@ Then create a new "Dockerfile" with the image configuration:
 # docker built -t <image name > .
 FROM osrf/ros:foxy-desktop
 
+RUN sudo apt-get clean
 RUN apt-get update
+RUN sudo apt-get upgrade -y
 RUN apt-get install -y git && apt-get install -y python3-pip
 RUN echo "git and pip Installed"
 RUN apt install -y gedit
