@@ -31,22 +31,29 @@ We wil use the "ROS2_rUBot_ws" as starting workspace for this project.
 
 Run a Container:
 ```shell
-docker run --name ROS2_Foxy_osrf -it osrf/ros:foxy-desktop
+docker run --name ROS2_mpuig -e DISPLAY=host.docker.internal:0.0 -it ros2_foxy_mpuig:latest
+```
+You open a terminal in this Container using VS Code:
+```shell
+cd ~/
 git clone https://github.com/manelpuig/ROS2_rUBot_ws
 ```
-If you want to creat
+You are ready to work with this work space
 
-## 2. **Create workspace**
+
+Proper documentation in: https://docs.ros.org/en/foxy/Tutorials/Beginner-CLI-Tools/Configuring-ROS2-Environment.html#
+
+
+## **2. Create workspace**
 
 You can create a workspace in your github account with your desired name (usually finished with ws), for exemple "ROS2_rUBot_ws". Add a subfolder "src" where you will place the packages.
 
-Usually you will clone this created ws in a docker container:
+Now you have to build the created ws:
 ```shell
-docker run --name ROS2_Foxy_osrf -it osrf/ros:foxy-desktop
-git clone https://github.com/manelpuig/ROS2_rUBot_ws
+colcon build --symlink-install
 ```
+Proper documentation is in: https://docs.ros.org/en/foxy/Tutorials/Beginner-Client-Libraries/Creating-A-Workspace/Creating-A-Workspace.html
 
-Proper documentation in: https://docs.ros.org/en/foxy/Tutorials/Beginner-CLI-Tools/Configuring-ROS2-Environment.html#
 
 ## 3. **Create first package**
 You can create your first package inside the src folder with a name "ros2_tutorial"
@@ -67,11 +74,11 @@ cd /home/ubuntu/ROS2_rUBot_ws
 source /home/ubuntu/ROS2_rUBot_ws/install/setup.bash
 ```
 
-Create your first Package: https://docs.ros.org/en/foxy/Tutorials/Creating-Your-First-ROS2-Package.html
+Proper documentation is in: https://docs.ros.org/en/foxy/Tutorials/Creating-Your-First-ROS2-Package.html
 
 ## 4. **Create first Publisher and Subscriber nodes**
 You can create your first Publisher and Subscriber using some templates.
-- Create files "publisher_hello,py" and "subscriber_hello.py"
+- Create files "publisher_hello.py" and "subscriber_hello.py"
 - Add entry points for Publisher and Subscriber
     
     Reopen setup.py and add the entry point for the subscriber node below the publisher’s entry point. The entry_points field should now look like this:
@@ -94,7 +101,7 @@ You can create your first Publisher and Subscriber using some templates.
     ```
 
 
-Create your first Publisher and Subscriber nodes: https://docs.ros.org/en/foxy/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Py-Publisher-And-Subscriber.html
+Proper documentation is in: https://docs.ros.org/en/foxy/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Py-Publisher-And-Subscriber.html
 
 ## 5. **Using parameters in a Class**
 
@@ -104,9 +111,24 @@ Detailed tutorial in: https://docs.ros.org/en/foxy/Tutorials/Beginner-Client-Lib
 
 Detailed
 
-## 7. **Githuib sync from docker**
+## 7. **Github sync from docker**
 
 When finished, **syncronize** the changes with your github. 
+
+The syncronisation could be done:
+- In VS Code for Docker
+- In Container terminal
+
+### **7.1. Github sync In VS Code for Docker**
+
+- In left-side menu select "Source control"
+- select the changes you want to sync
+- write commit message
+- push 
+
+First time you will have to verify your github account and write your username and password
+
+### **7.2. Github sync In Container terminal**
 - Open a terminal in your local repository and type the first time:
 ```shell
 git config --global user.email mail@alumnes.ub.edu
