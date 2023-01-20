@@ -38,8 +38,12 @@ You open a terminal in this Container using VS Code:
 cd ~/
 git clone https://github.com/manelpuig/ROS2_rUBot_ws
 ```
-You are ready to work with this work space
+Now you have to build the created ws:
+```shell
+colcon build --merge-install
+```
 
+You are ready to work with this work space
 
 Proper documentation in: https://docs.ros.org/en/foxy/Tutorials/Beginner-CLI-Tools/Configuring-ROS2-Environment.html#
 
@@ -50,7 +54,7 @@ You can create a workspace in your github account with your desired name (usuall
 
 Now you have to build the created ws:
 ```shell
-colcon build --symlink-install
+colcon build --merge-install
 ```
 Proper documentation is in: https://docs.ros.org/en/foxy/Tutorials/Beginner-Client-Libraries/Creating-A-Workspace/Creating-A-Workspace.html
 
@@ -66,18 +70,19 @@ colcon build --merge-install
 > - sudo apt install python3-colcon-common-extensions
 >
 
-Source the ws. Be sure in .bashrc file to have:
+Source the ws. Be sure in .bashrc file (in root folder) to have:
 ```shell
 source /opt/ros/foxy/setup.bash 
 source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
-cd /home/ubuntu/ROS2_rUBot_ws
-source /home/ubuntu/ROS2_rUBot_ws/install/setup.bash
+cd /home/ROS2_rUBot_ws
+source /home/ROS2_rUBot_ws/install/setup.bash
 ```
 
 Proper documentation is in: https://docs.ros.org/en/foxy/Tutorials/Creating-Your-First-ROS2-Package.html
 
 ## 4. **Create first Publisher and Subscriber nodes**
 You can create your first Publisher and Subscriber using some templates.
+- In ros2_tutorial/ros2_tutorial folder
 - Create files "publisher_hello.py" and "subscriber_hello.py"
 - Add entry points for Publisher and Subscriber
     
@@ -109,7 +114,13 @@ Detailed tutorial in: https://docs.ros.org/en/foxy/Tutorials/Beginner-Client-Lib
 
 ## 6. **Create Launch files**
 
-Detailed
+Launch files will be located in a specific package "rubot_bringup"
+```shell
+ros2 pkg create rubot_bringup
+```
+
+Detailed tutorial in: https://docs.ros.org/en/foxy/Tutorials/Intermediate/Launch/Creating-Launch-Files.html
+
 
 ## 7. **Github sync from docker**
 
