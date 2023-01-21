@@ -44,7 +44,7 @@ sudo apt install python3-colcon-common-extensions
 ```
 Now you have to build the created ws:
 ```shell
-colcon build --merge-install
+colcon build
 ```
 Source the work space. Be sure in .bashrc file (in root folder) to have:
 ```shell
@@ -69,8 +69,10 @@ You can create a workspace in your github account with your desired name (usuall
 
 Now you have to build the created ws:
 ```shell
-colcon build --merge-install
+colcon build
 ```
+Source the work space and you are ready to work with this repository
+
 Proper documentation is in: https://docs.ros.org/en/foxy/Tutorials/Beginner-Client-Libraries/Creating-A-Workspace/Creating-A-Workspace.html
 
 
@@ -79,11 +81,8 @@ You can create your first package inside the src folder with a name "ros2_tutori
 ```shell
 ros2 pkg create --build-type ament_python ros2_tutorial
 cd ..
-colcon build --merge-install
+colcon build
 ```
-> If colcon is not installed:
-> - sudo apt install python3-colcon-common-extensions
->
 
 Proper documentation is in: https://docs.ros.org/en/foxy/Tutorials/Creating-Your-First-ROS2-Package.html
 
@@ -104,7 +103,7 @@ You can create your first Publisher and Subscriber using some templates.
     ```
 - Compile inside ws: 
     ```shell
-    colcon build --merge-install
+    colcon build
     ```
 - Run:
     ```shell
@@ -146,10 +145,10 @@ endif()
 # find dependencies
 find_package(ament_cmake REQUIRED)
 
-install{DIRECTORY
+install(DIRECTORY
   launch
   DESTINATION share/${PROJECT_NAME}
-}
+)
 
 ament_package()
 ```
@@ -162,9 +161,19 @@ def generate_launch_description():
 
     return ld
 ```
+- make this file executable:
+```shell
+cd /home/ROS2_rUBot_ws/src/rubot_bringup/launch/
+chmod +x *
+```
 - Compile the created launch file:
 ```shell
-colcon build --packages-select rubot_bringup --merge-install
+cd /home/ROS2_rUBot_ws
+colcon build --packages-select rubot_bringup --symlink-install
+```
+- Execute the launch file:
+```shell
+ros2 launch rubot_bringup number_app.launch.py
 ```
 
 Detailed tutorial in: https://docs.ros.org/en/foxy/Tutorials/Intermediate/Launch/Creating-Launch-Files.html

@@ -8,7 +8,7 @@ def generate_launch_description():
     remap_number_topic = ("number", "my_number")
 
     number_publisher_node = Node(
-        package="my_py_pkg",
+        package="ros2_tutorial",
         executable="number_publisher",
         name="my_number_publisher",
         remappings=[
@@ -20,16 +20,6 @@ def generate_launch_description():
         ]
     )
 
-    number_counter_node = Node(
-        package="my_cpp_pkg",
-        executable="number_counter",
-        name="my_number_counter",
-        remappings=[
-            remap_number_topic,
-            ("number_count", "my_number_count")
-        ]
-    )
-
     ld.add_action(number_publisher_node)
-    ld.add_action(number_counter_node)
+
     return ld
