@@ -81,6 +81,8 @@ docker exec -it (container_id) bash
 ```
 Close the container deleting it from Docker Desktop
 
+> If you have any error opening a created container (failed connection) you will have to restart the Docker Desktop (from "troubleshoot" up-side menu bar)!
+
 ### **1.3 Docker getting starter**
 Lets see a simple Talker-Listener exemple
 

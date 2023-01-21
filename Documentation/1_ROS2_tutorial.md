@@ -38,10 +38,25 @@ You open a terminal in this Container using VS Code:
 cd ~/
 git clone https://github.com/manelpuig/ROS2_rUBot_ws
 ```
+Before build the ws, be sure you have installed python3-colcon-common-extensions
+```shell
+sudo apt install python3-colcon-common-extensions
+```
 Now you have to build the created ws:
 ```shell
 colcon build --merge-install
 ```
+Source the work space. Be sure in .bashrc file (in root folder) to have:
+```shell
+source /opt/ros/foxy/setup.bash 
+source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
+cd /home/ROS2_rUBot_ws
+source /home/ROS2_rUBot_ws/install/setup.bash
+```
+> In VS Code to open .bashrc you have to:
+>- allow to view hidden files: file > preferences > settings > Text editor > files > exclude and adapt the filters
+>- Open the Container from the first directory: file > open folder select the "/" directory
+>- Open .bashrc in root directory (in /root/.bashrc)
 
 You are ready to work with this work space
 
@@ -59,7 +74,7 @@ colcon build --merge-install
 Proper documentation is in: https://docs.ros.org/en/foxy/Tutorials/Beginner-Client-Libraries/Creating-A-Workspace/Creating-A-Workspace.html
 
 
-## 3. **Create first package**
+## **3. Create first package**
 You can create your first package inside the src folder with a name "ros2_tutorial"
 ```shell
 ros2 pkg create --build-type ament_python ros2_tutorial
@@ -70,17 +85,9 @@ colcon build --merge-install
 > - sudo apt install python3-colcon-common-extensions
 >
 
-Source the ws. Be sure in .bashrc file (in root folder) to have:
-```shell
-source /opt/ros/foxy/setup.bash 
-source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
-cd /home/ROS2_rUBot_ws
-source /home/ROS2_rUBot_ws/install/setup.bash
-```
-
 Proper documentation is in: https://docs.ros.org/en/foxy/Tutorials/Creating-Your-First-ROS2-Package.html
 
-## 4. **Create first Publisher and Subscriber nodes**
+## **4. Create first Publisher and Subscriber nodes**
 You can create your first Publisher and Subscriber using some templates.
 - In ros2_tutorial/ros2_tutorial folder
 - Create files "publisher_hello.py" and "subscriber_hello.py"
@@ -108,15 +115,56 @@ You can create your first Publisher and Subscriber using some templates.
 
 Proper documentation is in: https://docs.ros.org/en/foxy/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Py-Publisher-And-Subscriber.html
 
-## 5. **Using parameters in a Class**
+## **5. Using parameters in a Class**
 
 Detailed tutorial in: https://docs.ros.org/en/foxy/Tutorials/Beginner-Client-Libraries/Using-Parameters-In-A-Class-Python.html
 
-## 6. **Create Launch files**
+## **6. Create Launch files**
 
-Launch files will be located in a specific package "rubot_bringup"
+The launch system in ROS 2 is responsible for helping the user describe the configuration of their system and then execute it as described. Launch files written in Python, XML, or YAML can start and stop different nodes as well as trigger and act on various events. 
+
+- Create package "rubot_bringup". Launch files will be located in a specific package "rubot_bringup" in order to simplify the dependencies. In this case the build-type will be ament_cmake (this is the default)
 ```shell
-ros2 pkg create rubot_bringup
+ros2 pkg create --build-type ament_cmake rubot_bringup
+```
+- We remove the "include" and "src" directories
+- we create a "launch" directory
+- To install this launch directory we modify the CMakeLists.txt file as below
+```python
+cmake_minimum_required(VERSION 3.5)
+project(rubot_bringup)
+
+# Default to C++14
+if(NOT CMAKE_CXX_STANDARD)
+  set(CMAKE_CXX_STANDARD 14)
+endif()
+
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
+
+# find dependencies
+find_package(ament_cmake REQUIRED)
+
+install{DIRECTORY
+  launch
+  DESTINATION share/${PROJECT_NAME}
+}
+
+ament_package()
+```
+- Let's create our first launch file. Use this template:
+```python
+from launch import LaunchDescription
+
+def generate_launch_description():
+    ld = LaunchDescription()
+
+    return ld
+```
+- Compile the created launch file:
+```shell
+colcon build --packages-select rubot_bringup --merge-install
 ```
 
 Detailed tutorial in: https://docs.ros.org/en/foxy/Tutorials/Intermediate/Launch/Creating-Launch-Files.html
