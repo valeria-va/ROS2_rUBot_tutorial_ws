@@ -26,65 +26,68 @@ And the ROS2 reference sites:
 
 Installation will be made using Docker
 
-## **1. Clone a starting workspace**
+## **1. ROS2 workspace and packages**
+
+The **ROS2 workspace** is the directory in your hard disk where your ROS2 packages reside to be usable by ROS2.
+
+ROS2 uses **packages** to organize its programs. You can think of a package as all the files that a specific ROS2 program contains
+
+In ROS2, you can create two types of packages: Python packages and CMake (C++) packages.
+
+Every **Python package** will have the following structure of files and folders:
+
+- package.xml - File containing meta-information about the package (maintainer of the package, dependencies, etc.).
+
+- setup.py - File containing instructions for how to compile the package.
+
+- setup.cfg - File that defines where the scripts will be installed.
+
+- /<package_name> - This directory will always have the same name as your package. You will put all your Python scripts inside this folder. Note that it already contains an empty __init__.py file.
+
+Some packages might contain extra folders. For instance, the launch folder contains the package's launch files 
+
 We wil use the "ROS2_rUBot_ws" as starting workspace for this project.
 
-Run a Container:
-```shell
-docker run --name ROS2_mpuig -e DISPLAY=host.docker.internal:0.0 -it ros2_foxy_mpuig:latest
-```
 You open a terminal in this Container using VS Code:
 ```shell
-cd ~/
+cd /home
 git clone https://github.com/manelpuig/ROS2_rUBot_ws
 ```
-Before build the ws, be sure you have installed python3-colcon-common-extensions
+**Create a new package**
+Every time you want to create a package, you have to be in this directory src. Type into your Webshell the following command:
 ```shell
-sudo apt install python3-colcon-common-extensions
+ros2 pkg create --build-type ament_python my_package --dependencies rclpy
+For exemple
+ros2 pkg create --build-type ament_python ros2_tutorial --dependencies rclpy
 ```
+>the <package_dependencies> are the names of other ROS2 packages that your package depends on.
+
 Now you have to build the created ws:
 ```shell
+cd /home/ROS2_rUBot_ws
 colcon build
 ```
-Source the work space. Be sure in .bashrc file (in root folder) to have:
+Source the workspace. Be sure in .bashrc file (in root folder) to have:
 ```shell
-source /opt/ros/foxy/setup.bash 
+source /opt/ros/humble/setup.bash 
 source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
 cd /home/ROS2_rUBot_ws
 source /home/ROS2_rUBot_ws/install/setup.bash
 ```
-> In VS Code to open .bashrc you have to:
->- allow to view hidden files: file > preferences > settings > Text editor > files > exclude and adapt the filters
->- Open the Container from the first directory: file > open folder select the "/" directory
->- Open .bashrc in root directory (in /root/.bashrc)
+You are ready to work with this workspace
 
-You are ready to work with this work space
+Some interesting commands:
+- ros2 pkg list: Gives you a list of all your ROS system packages.
 
-Proper documentation in: https://docs.ros.org/en/foxy/Tutorials/Beginner-CLI-Tools/Configuring-ROS2-Environment.html#
+- ros2 pkg list | grep my_package: Filters, from all of the packages located in the ROS system, the package is named my_package.
 
-
-## **2. Create workspace**
-
-You can create a workspace in your github account with your desired name (usually finished with ws), for exemple "ROS2_rUBot_ws". Add a subfolder "src" where you will place the packages.
-
-Now you have to build the created ws:
+**Compile a Package**
+Sometimes (for large projects), you will not want to compile all of your packages. This would take such a long time. So instead, you can use the following command to compile only the packages where you have made changes:
 ```shell
-colcon build
+colcon build --packages-select <package_name>
 ```
-Source the work space and you are ready to work with this repository
-
-Proper documentation is in: https://docs.ros.org/en/foxy/Tutorials/Beginner-Client-Libraries/Creating-A-Workspace/Creating-A-Workspace.html
-
-
-## **3. Create first package**
-You can create your first package inside the src folder with a name "ros2_tutorial"
-```shell
-ros2 pkg create --build-type ament_python ros2_tutorial
-cd ..
-colcon build
-```
-
-Proper documentation is in: https://docs.ros.org/en/foxy/Tutorials/Creating-Your-First-ROS2-Package.html
+## **What is a Launch File?**
+You have seen how ROS2 can run programs from launch files. However, how do they work?
 
 ## **4. Create first Publisher and Subscriber nodes**
 You can create your first Publisher and Subscriber using some templates.
