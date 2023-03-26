@@ -54,6 +54,7 @@ cd /home
 git clone https://github.com/manelpuig/ROS2_rUBot_ws
 ```
 **Create a new package**
+
 Every time you want to create a package, you have to be in this directory src. Type into your Webshell the following command:
 ```shell
 ros2 pkg create --build-type ament_python my_package --dependencies rclpy
@@ -67,6 +68,13 @@ Now you have to build the created ws:
 cd /home/ROS2_rUBot_ws
 colcon build
 ```
+> Important warning solutions:
+>- If warnings related to "SetuptoolsDeprecationWarning: setup.py install is deprecated". Install setup tools version 58.2.0 (last version to work with ros2 python packages without any warnings)
+>   - pip install setuptools==58.2.0
+>- If warnings related to CMAKE_PREFIX_PATH, AMENT_PREFIX_PATH environment variables non existing values, reset them with:
+>   - export AMENT_PREFIX_PATH=""
+>   - export CMAKE_PREFIX_PATH=""
+
 Source the workspace. Be sure in .bashrc file (in root folder) to have:
 ```shell
 source /opt/ros/humble/setup.bash 
@@ -82,23 +90,31 @@ Some interesting commands:
 - ros2 pkg list | grep my_package: Filters, from all of the packages located in the ROS system, the package is named my_package.
 
 **Compile a Package**
+
 Sometimes (for large projects), you will not want to compile all of your packages. This would take such a long time. So instead, you can use the following command to compile only the packages where you have made changes:
 ```shell
 colcon build --packages-select <package_name>
 ```
-## **What is a Launch File?**
-You have seen how ROS2 can run programs from launch files. However, how do they work?
 
 ## **2. ROS2 Nodes**
 In ROS2, each node should be responsible for a single module (e.g., one node for controlling wheel motors, one for controlling a LIDAR control, etc.). Each node can communicate with other nodes through different methods.
 
-A full robotic system is comprised of many nodes working together. In ROS2, a single executable (a C++ or Python program, etc.) can contain one or more nodes.
-
+A full robotic system is comprised of many nodes working together. In ROS2, a single executable (a C++ or Python program, etc.) can contain one node.
 
 **Create first ROS2 Program**
-You can create your first Publisher and Subscriber using some templates.
-- In ros2_tutorial/ros2_tutorial folder
-- Create files "publisher_hello.py" and "subscriber_hello.py"
+
+You can create a program based on two nodes:
+- A Publisher node that publish a string message "Hello world" to a "/pub_topic" topic
+- A subscriber node that subscribes to "/pub_topic" and prints on the screen the read message.
+
+Each node is created within a python program in "src/ros2_tutorial/ros2_tutorial" folder:
+- "publisher_hello.py": creates a simple_publisher node
+- "subscriber_hello.py": creates a simple_subscriber node
+
+You can create Publisher and Subscriber python files using speciffic templates.
+
+Next step is to generate an executable from the python scripts you created. This is done in the "setup.py" file. The **setup.py** file contains all the necessary instructions for properly compiling your package. To do that, you work with a dictionary named entry_points. Inside it, you find an array called console_scripts.
+
 - Add entry points for Publisher and Subscriber
     
     Reopen setup.py and add the entry point for the subscriber node below the publisher’s entry point. The entry_points field should now look like this:
@@ -110,119 +126,64 @@ You can create your first Publisher and Subscriber using some templates.
         ],
     },
     ```
+You can see these lines as follows:    '<executable_name> = <package_name>.<script_name>:main'
+
 - Compile inside ws: 
     ```shell
     colcon build
     ```
-- Run:
+- Run in a separate terminals:
     ```shell
     ros2 run ros2_tutorial publisher_node
     ros2 run ros2_tutorial subscriber_node
     ```
+## **3. Create Launch files**
 
+ROS2 programs can be run:
+- from executable files
+- from launch files. 
 
-Proper documentation is in: https://docs.ros.org/en/foxy/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Py-Publisher-And-Subscriber.html
+When using executable files, we need one terminal to run each node. 
 
-## **5. Using parameters in a Class**
-
-Detailed tutorial in: https://docs.ros.org/en/foxy/Tutorials/Beginner-Client-Libraries/Using-Parameters-In-A-Class-Python.html
-
-## **6. Create Launch files**
+To make easier this process using a unique terminal to launch multiple nodes, we will use launch files.
 
 The launch system in ROS 2 is responsible for helping the user describe the configuration of their system and then execute it as described. Launch files written in Python, XML, or YAML can start and stop different nodes as well as trigger and act on various events. 
 
-- Create package "rubot_bringup". Launch files will be located in a specific package "rubot_bringup" in order to simplify the dependencies. In this case the build-type will be ament_cmake (this is the default)
+To create a launch file we have to:
+- create a "launch" folder in "src/ros2_tutorial/"
+- Inside create a "hello_pub_sub.launch.py" file and make it executable
+- Open setup.py file and make some modifications to:
+    - Import some libraries
+    ```shell
+    import os
+    from glob import glob
+    ```
+    - share this launch folder to the executable path. Add this line in "data_files"
+    ```shell
+    (os.path.join('share', package_name), glob('launch/*.launch.py'))
+    ```
+- compile again
+
+Now you can execute the launch file:
 ```shell
-ros2 pkg create --build-type ament_cmake rubot_bringup
+ros2 launch ros2_tutorial hello_pub_sub.launch.py
 ```
-- We remove the "include" and "src" directories
-- we create a "launch" directory
-- To install this launch directory we modify the CMakeLists.txt file as below
-```python
-cmake_minimum_required(VERSION 3.5)
-project(rubot_bringup)
+**Exercise:**
 
-# Default to C++14
-if(NOT CMAKE_CXX_STANDARD)
-  set(CMAKE_CXX_STANDARD 14)
-endif()
+Make a ROS2 program based on 2 nodes:
+- A Publisher node that publish a INT32 number to a "/pub_topic" topic
+- A subscriber node that subscribes to "/pub_topic", multiplies this number by 2 and prints on the screen the resulting value.
 
-if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-  add_compile_options(-Wall -Wextra -Wpedantic)
-endif()
-
-# find dependencies
-find_package(ament_cmake REQUIRED)
-
-install(DIRECTORY
-  launch
-  DESTINATION share/${PROJECT_NAME}
-)
-
-ament_package()
-```
-- Let's create our first launch file. Use this template:
-```python
-from launch import LaunchDescription
-
-def generate_launch_description():
-    ld = LaunchDescription()
-
-    return ld
-```
-- make this file executable:
-```shell
-cd /home/ROS2_rUBot_ws/src/rubot_bringup/launch/
-chmod +x *
-```
-- Compile the created launch file:
-```shell
-cd /home/ROS2_rUBot_ws
-colcon build --packages-select rubot_bringup --symlink-install
-```
-- Execute the launch file:
-```shell
-ros2 launch rubot_bringup number_app.launch.py
-```
-
-Detailed tutorial in: https://docs.ros.org/en/foxy/Tutorials/Intermediate/Launch/Creating-Launch-Files.html
+Construc the corresponding launch file to execute the program
 
 
-## 7. **Github sync from docker**
+## **4.Client Libraries**
+ROS client libraries allow nodes written in various programming languages to communicate. A core ROS client library (RCL) implements the standard functionality needed by various ROS APIs. This makes it easier to write language-specific client libraries.
 
-When finished, **syncronize** the changes with your github. 
+The ROS2 team currently maintains the following client libraries:
 
-The syncronisation could be done:
-- In VS Code for Docker
-- In Container terminal
+- rclcpp = C++ client library
+- rclpy = Python client library
 
-### **7.1. Github sync In VS Code for Docker**
-
-- In left-side menu select "Source control"
-- select the changes you want to sync
-- write commit message
-- push 
-
-First time you will have to verify your github account and write your username and password
-
-### **7.2. Github sync In Container terminal**
-- Open a terminal in your local repository and type the first time:
-```shell
-git config --global user.email mail@alumnes.ub.edu
-git config --global user.name 'your github username'
-git config --global credential.helper store
-```
-- for succesive times, you only need to do:
-```shell
-git add -A
-git commit -a -m 'message'
-git push
-```
-- you will need to insert the username and the saved PAT password
-- syncronize your repository several times to save your work in your github account
-> - You can **update** your repository either in your local or **remote repository**:
->   - Local: with the previous instructions
->   - Remote: using web-based Visual Studio Code:
->       - pressing "·" key
->       - performing repository modifications
->       - typing "**git pull**" to syncronize
+Additionally, other client libraries have been developed by the ROS community. You can find some more information in:
+https://docs.ros.org/en/humble/Concepts/About-ROS-2-Client-Libraries.html

@@ -1,1 +1,0 @@
-/home/ROS2_rUBot_ws/src/rubot_bringup/launch/number_app.launch.py
