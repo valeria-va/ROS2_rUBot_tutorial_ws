@@ -89,7 +89,13 @@ colcon build --packages-select <package_name>
 ## **What is a Launch File?**
 You have seen how ROS2 can run programs from launch files. However, how do they work?
 
-## **4. Create first Publisher and Subscriber nodes**
+## **2. ROS2 Nodes**
+In ROS2, each node should be responsible for a single module (e.g., one node for controlling wheel motors, one for controlling a LIDAR control, etc.). Each node can communicate with other nodes through different methods.
+
+A full robotic system is comprised of many nodes working together. In ROS2, a single executable (a C++ or Python program, etc.) can contain one or more nodes.
+
+
+**Create first ROS2 Program**
 You can create your first Publisher and Subscriber using some templates.
 - In ros2_tutorial/ros2_tutorial folder
 - Create files "publisher_hello.py" and "subscriber_hello.py"
