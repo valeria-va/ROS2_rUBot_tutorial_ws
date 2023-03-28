@@ -130,7 +130,7 @@ Now you can launch the rover in rviz and gazebo
 ```shell
 ros2 launch rubot_description rover_rviz.launch.py
 ```
-
+See exemples: https://github.com/ros-controls/ros2_control_demos
 
 ### **2.2. ROS2 rUBot control**
 The objectives of this section are:
