@@ -176,6 +176,8 @@ def generate_launch_description():
 <node pkg="ros2_tutorial" exec="subscriber_node"/>
 </launch>
 ```
+See documentation: https://docs.ros.org/en/humble/How-To-Guides/Launch-files-migration-guide.html
+
 - Open setup.py file and make some modifications to:
     - Import some libraries
     ```shell
