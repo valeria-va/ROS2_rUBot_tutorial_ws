@@ -151,7 +151,31 @@ The launch system in ROS 2 is responsible for helping the user describe the conf
 
 To create a launch file we have to:
 - create a "launch" folder in "src/ros2_tutorial/"
-- Inside create a "hello_pub_sub.launch.py" file and make it executable
+- Inside create the launch file in different formats:
+- Launch file in Python: "hello_pub_sub.launch.py" file and make it executable
+```python
+from launch import LaunchDescription
+from launch_ros.actions import Node
+
+def generate_launch_description():
+    return LaunchDescription([
+        Node(
+            package='ros2_tutorial',
+            executable='publisher_node',
+            output='screen'),
+        Node(
+            package='ros2_tutorial',
+            executable='subscriber_node',
+            output='screen'),
+    ])
+```
+- Launch file in XML: "hello_pub_sub.xml" file
+```xml
+<launch>
+<node pkg="ros2_tutorial" exec="publisher_node"/>
+<node pkg="ros2_tutorial" exec="subscriber_node"/>
+</launch>
+```
 - Open setup.py file and make some modifications to:
     - Import some libraries
     ```shell
@@ -160,7 +184,7 @@ To create a launch file we have to:
     ```
     - share this launch folder to the executable path. Add this line in "data_files"
     ```shell
-    (os.path.join('share', package_name), glob('launch/*.launch.py'))
+    (os.path.join('share', package_name), glob('launch/*'))
     ```
 - compile again
 
