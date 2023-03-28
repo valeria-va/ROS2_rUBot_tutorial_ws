@@ -6,9 +6,9 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
     package_dir = get_package_share_directory("rubot_description")
-    urdf_path = os.path.join(package_dir, "rover.urdf")
+    urdf = os.path.join(package_dir, "rover.urdf")
     rviz_config_file=os.path.join(package_dir, "config.rviz")
-    urdf = open(urdf_path).read()
+    #urdf = open(urdf_path).read()
 
     return LaunchDescription([
         Node(
@@ -16,8 +16,9 @@ def generate_launch_description():
             executable='robot_state_publisher',
             name='robot_state_publisher',
             output='screen',
-            parameters=[{'robot_description': urdf}]),
-            #arguments=[urdf]),
+            arguments=[urdf]),
+            #parameters=[{'robot_description': urdf}]),
+            
         Node(
             package='joint_state_publisher_gui',
             executable='joint_state_publisher_gui',
