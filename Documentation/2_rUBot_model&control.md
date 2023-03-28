@@ -115,9 +115,37 @@ def generate_launch_description():
             arguments=["-topic", "/robot_description", "-entity", "dolly"])
   ])
 ```
+- Be sure to have installed the needed packages:
+```shell
+sudo apt install ros-humble-joint-state-publisher
+sudo apt install ros-humble-joint-state-publisher-gui
+sudo apt install ros-humble-robot-state-publisher
+sudo apt install ros-humble-gazebo-ros-pkgs
+```
 
 
 - compile the final package
 
 Now you can launch the rover in rviz and gazebo
+```shell
+ros2 launch rubot_description rover_rviz.launch.py
+```
 
+
+### **2.2. ROS2 rUBot control**
+The objectives of this section are:
+- Create a new "rubot_control" package  
+- Create ROS2 programs to control the robot to:
+    - move with teleop keyboard
+    - move with joy
+    - move with speciffic node
+    - obstacle avoidance
+    - wall follower
+    - line follower
+#### **2.2.1. Create a new "rubot_control" package**
+To create this package, type:
+```shell
+ros2 pkg create --build-type ament_python rubot_control --dependencies rclpy
+```
+Now proceed with the following instructions:
+- add "launch" folder
