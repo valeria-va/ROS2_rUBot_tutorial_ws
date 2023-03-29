@@ -3,6 +3,13 @@ The objectives of this section are:
 - Develop a custom model of rUBot in virtual environment
 - Create a Control package in virtual environment
 
+First of all, we need to install Gazebo for ROS2 Humble version. The recommended version is Gazebo Garden. For this purpose, follow instructions in:
+- https://gazebosim.org/docs
+- https://gazebosim.org/docs/garden/install_ubuntu
+
+Install also Ignition Gazebo6:
+- https://gazebosim.org/api/gazebo/6.1/install.html
+
 Interesting project to take into account:
 - https://github.com/noshluk2/ROS2-Raspberry-PI-Intelligent-Vision-Robot
 
@@ -12,6 +19,9 @@ The objectives of this section are:
     - the rubot model in URDF format
     - the different part models and custom designed worlds
 - Spawn the rubot model in a proper virtual world in gazebo environment
+
+For that follow tutorial in:
+- https://docs.ros.org/en/humble/Tutorials/Advanced/Simulators/Gazebo.html
 
 #### **2.1.1. Create a new "rubot_description" package**
 To create this package, type:

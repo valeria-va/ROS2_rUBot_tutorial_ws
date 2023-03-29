@@ -151,8 +151,23 @@ The launch system in ROS 2 is responsible for helping the user describe the conf
 
 To create a launch file we have to:
 - create a "launch" folder in "src/ros2_tutorial/"
-- Inside create the launch file in different formats:
-- Launch file in Python: "hello_pub_sub.launch.py" file and make it executable
+- Inside create the launch file in different formats (python or XML)
+- Enable the execution of all files in "launch" folder. For that you have to open "setup.py" file and make some modifications to:
+    - Import some libraries
+    ```shell
+    import os
+    from glob import glob
+    ```
+    - share this launch folder to the executable path. Add this line in "data_files"
+    ```shell
+    (os.path.join('share', package_name), glob('launch/*'))
+    ```
+- compile again
+
+**Writting launch files**
+
+Launch files can be written in python, XML or YAML formats. We show here the same lauch file in the 3 different formats.
+- Launch file in Python format: "hello_pub_sub.launch.py" file
 ```python
 from launch import LaunchDescription
 from launch_ros.actions import Node
@@ -169,7 +184,11 @@ def generate_launch_description():
             output='screen'),
     ])
 ```
-- Launch file in XML: "hello_pub_sub.xml" file
+Now you can execute the launch file:
+```shell
+ros2 launch ros2_tutorial hello_pub_sub.launch.py
+```
+- Launch file in XML format: "hello_pub_sub.xml" file
 ```xml
 <launch>
 <node pkg="ros2_tutorial" exec="publisher_node"/>
@@ -178,22 +197,28 @@ def generate_launch_description():
 ```
 See documentation: https://docs.ros.org/en/humble/How-To-Guides/Launch-files-migration-guide.html
 
-- Open setup.py file and make some modifications to:
-    - Import some libraries
-    ```shell
-    import os
-    from glob import glob
-    ```
-    - share this launch folder to the executable path. Add this line in "data_files"
-    ```shell
-    (os.path.join('share', package_name), glob('launch/*'))
-    ```
-- compile again
-
 Now you can execute the launch file:
 ```shell
-ros2 launch ros2_tutorial hello_pub_sub.launch.py
+ros2 launch ros2_tutorial hello_pub_sub.xml
 ```
+- Launch file in YAML format: "hello_pub_sub.yaml" file
+```yaml
+launch:
+
+- node:
+    pkg: "ros2_tutorial"
+    exec: "publisher_node"
+    name: "simple_publisher"
+- node:
+    pkg: "ros2_tutorial"
+    exec: "subscriber_node"
+    name: "simple_subscriber"
+```
+Now you can execute the launch file:
+```shell
+ros2 launch ros2_tutorial hello_pub_sub.yaml
+```
+
 **Exercise:**
 
 Make a ROS2 program based on 2 nodes:
