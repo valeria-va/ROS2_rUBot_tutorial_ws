@@ -10,6 +10,13 @@ First of all, we need to install Gazebo for ROS2 Humble version. The recommended
 Install also Ignition Gazebo6:
 - https://gazebosim.org/api/gazebo/6.1/install.html
 
+Follow tutorial in:
+- https://gazebosim.org/docs/garden/tutorials
+- https://github.com/gazebosim/ros_gz
+- https://github.com/gazebosim/ros_gz/tree/ros2/ros_gz_sim
+- https://github.com/gazebosim/ros_gz/tree/ros2/ros_gz_sim_demos
+
+
 Interesting project to take into account:
 - https://github.com/noshluk2/ROS2-Raspberry-PI-Intelligent-Vision-Robot
 
