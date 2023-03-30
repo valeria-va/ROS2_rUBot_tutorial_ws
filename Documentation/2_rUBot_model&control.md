@@ -149,6 +149,14 @@ ros2 launch rubot_description rover_rviz.launch.py
 ```
 See exemples: https://github.com/ros-controls/ros2_control_demos
 
+### **Open URDF model from Gazebo Garden**
+
+Open Gazebo
+```shell
+gz sim empty.sdf
+
+gz service -s /world/empty/create --reqtype gz.msgs.EntityFactory --reptype gz.msgs.Boolean --timeout 1000 --req 'sdf_filename: "/home/ROS2_rUBot_ws/src/rubot_description/urdf/gopigo3ydmpuig.urdf", name: "gopigo3"'
+
 ### **2.2. ROS2 rUBot control**
 The objectives of this section are:
 - Create a new "rubot_control" package  
