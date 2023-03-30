@@ -16,5 +16,13 @@ Let's create a container with shared folder:
 ```shell
 docker run --name ROS2_Humble_osrf -e DISPLAY=host.docker.internal:0.0 --mount src="C:\Users\puigm\Desktop\ROS_github\myPC_shared",dst=/home/myDocker_shared,type=bind -it osrf/ros:humble-desktop-full
 ```
+Now inside Humble container:
+```shell
+sudo apt update
+sudo apt upgrade
+sudo apt install ros-dev-tools
+apt install -y git && apt install -y python3-pip
+```
+
 The documentation will be found in: https://docs.ros.org/en/humble/index.html
 
