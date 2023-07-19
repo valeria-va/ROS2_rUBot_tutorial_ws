@@ -76,6 +76,7 @@ sudo apt update
 sudo apt upgrade
 sudo apt install ros-dev-tools
 apt install -y git && apt install -y python3-pip
+sudo apt install python3-colcon-common-extensions
 ```
 
 The documentation will be found in: https://docs.ros.org/en/humble/index.html
