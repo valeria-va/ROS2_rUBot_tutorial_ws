@@ -1,29 +1,5 @@
 # **ROS2 tutorial**
 
-ROS1 is close to finish and you can switch to ROS2
-![](./Images/7_ROS2_time.png)
-ROS2 structure is based on the architecture:
-![](./Images/7_ROS1_ROS2.png)
-The main differences are:
-![](./Images/7_ROS2_dif.png)
-
-ROS2 is a very good choice.
-
-Interesting references for courses:
-- Edouard Renard: https://www.udemy.com/course/ros2-for-beginners/learn/lecture/20260476#overview
-- https://www.udemy.com/course/learn-ros2-as-a-ros1-developer-and-migrate-your-ros-projects/learn/lecture/22003074#overview
-- https://www.udemy.com/course/ros2-ultimate-mobile-robotics-course-for-beginners-opencv/learn/lecture/28143024#overview
-- https://www.udemy.com/course/ros2-self-driving-car-with-deep-learning-and-computer-vision/learn/lecture/28236852#overview
-
-Some interesting projects:
-- https://github.com/noshluk2/ROS2-Raspberry-PI-Intelligent-Vision-Robot
-- https://github.com/noshluk2/ROS2-Ultimate-Mobile-Robotics-Course-for-Beginners-OpenCV
-- https://github.com/noshluk2/ROS2-Self-Driving-Car-AI-using-OpenCV
-
-And the ROS2 reference sites:
-- https://docs.ros.org/
-- https://docs.ros.org/en/foxy/
-
 Installation will be made using Docker
 
 ## **1. ROS2 workspace and packages**
