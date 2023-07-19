@@ -30,13 +30,59 @@ The objectives of this section are:
 For that follow tutorial in:
 - https://docs.ros.org/en/humble/Tutorials/Advanced/Simulators/Gazebo.html
 
-#### **2.1.1. Create a new "rubot_description" package**
+#### **2.1.1. Create a new "robot_description" package**
 To create this package, type:
 ```shell
-ros2 pkg create --build-type ament_python rubot_description --dependencies rclpy
+ros2 pkg create robot_description
 ```
 Now proceed with the following instructions:
-- add "launch" and "urdf" folders
+- remove "src" and "include" folders
+- add "urdf", "launch" and "rviz" folders
+- place the robot model in urdf folder
+- Install the urdf folder modifying the "CMakeList.txt" file:
+```shell
+cmake_minimum_required(VERSION 3.8)
+project(robot_description)
+
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
+
+# find dependencies
+find_package(ament_cmake REQUIRED)
+
+install(
+  DIRECTORY urdf launch rviz
+  DESTINATION share/${PROJECT_NAME}/
+)
+
+ament_package()
+```
+- move to the ws and compile again
+- You can see your model in "~/ROS2_rUBot_ws/install/robot_description/share/robot_description/urdf" folder
+
+Now everything is ready to create the **launch file**. This can be done in python but also in xml. We will do in xml language for simplicity and better understanding.
+- verify "launch" folder is created and CMakeList.txt is created properly
+- create a new file "display.launch.xml" inside
+- compile again
+- source install/setup.bash
+- Launch:
+```shell
+ros2 launch robot_description display.launch.xml
+```
+- Configure the rviz with:
+    - Fixed frame to "base_footprint"
+    - add "RobotModel"
+    - select the robot Description topic to /robot_description
+    - add TFs
+- save config to rviz folder as "urdf_config.rviz"
+
+> Perhaps you will have to install:
+>
+>sudo apt install ros-humble-joint-state-publisher-gui
+
+![](./Images/03_rubot_model/1_urdf_robot.png)
+
 - provide the path to these new folders. This can be done in setup.py file. We have to add some lines at the begining to import some libraries and specify the folder paths:
 ```python
 from setuptools import setup

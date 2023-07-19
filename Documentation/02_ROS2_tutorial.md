@@ -46,7 +46,7 @@ colcon build
 ```
 > Important warning solutions:
 >- If warnings related to "SetuptoolsDeprecationWarning: setup.py install is deprecated". Install setup tools version 58.2.0 (last version to work with ros2 python packages without any warnings)
->   - pip install setuptools==58.2.0
+>   - sudo pip install setuptools==58.2.0
 >- If warnings related to CMAKE_PREFIX_PATH, AMENT_PREFIX_PATH environment variables non existing values, reset them with:
 >   - export AMENT_PREFIX_PATH=""
 >   - export CMAKE_PREFIX_PATH=""
