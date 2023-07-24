@@ -39,7 +39,7 @@ Now proceed with the following instructions:
 - remove "src" and "include" folders
 - add "urdf", "launch" and "rviz" folders
 - place the robot model in urdf folder
-- Install the urdf folder modifying the "CMakeList.txt" file:
+- Install the urdf, launch and rviz folders modifying the "CMakeList.txt" file:
 ```shell
 cmake_minimum_required(VERSION 3.8)
 project(robot_description)
@@ -82,6 +82,93 @@ ros2 launch robot_description display.launch.xml
 >sudo apt install ros-humble-joint-state-publisher-gui
 
 ![](./Images/03_rubot_model/1_urdf_robot.png)
+
+The same launch file can be done in python. You can see the syntax in "display.launch,py" file in "launch" folder.
+- compile the ws
+- open a new terminal and type
+```shell
+roslaunch robot_description display.launch.py
+```
+>You will see the same as before
+
+If your model is defined i xacro format, you can use the same launch files, you have only to change the name of robot model to "my_robot.urdf.xacro", in launch file:
+```xml
+...
+<let name="urdf_path" 
+     value="$(find-pkg-share robot_description)/urdf/my_robot.urdf.xacro" />
+...
+```
+
+
+#### **2.1.2. Create a new robot_bringup package**
+
+This is usually made to spawn the robot model in a proper virtual world in gazebo environment.
+
+Let's follow similar steps as previous section for robot_description package:
+- Create a new package:
+```shell
+ros2 pkg create robot_bringup
+```
+- remove "src" and "include" folders
+- add "launch" folder
+- Install the launch folder modifying the "CMakeList.txt" file:
+```shell
+cmake_minimum_required(VERSION 3.8)
+project(robot_bringup)
+
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
+
+# find dependencies
+find_package(ament_cmake REQUIRED)
+
+install(
+  DIRECTORY launch
+  DESTINATION share/${PROJECT_NAME}/
+)
+
+ament_package()
+```
+- create a new "robot_gazebo.launch.xml"
+```xml
+<launch>
+    <let name="urdf_path" 
+         value="$(find-pkg-share robot_description)/urdf/my_robot.urdf.xacro" />
+    <let name="rviz_config_path"
+         value="$(find-pkg-share robot_bringup)/rviz/urdf_config.rviz" />
+
+    <node pkg="robot_state_publisher" exec="robot_state_publisher">
+        <param name="robot_description"
+               value="$(command 'xacro $(var urdf_path)')" />
+    </node>
+
+    <include file="$(find-pkg-share gazebo_ros)/launch/gazebo.launch.py">
+     <arg name="world" value="$(find-pkg-share robot_bringup)/worlds/test_world.world" />
+    </include>
+
+    <node pkg="gazebo_ros" exec="spawn_entity.py"
+          args="-topic robot_description -entity my_robot" />
+
+    <node pkg="rviz2" exec="rviz2" output="screen" 
+          args="-d $(var rviz_config_path)" />
+</launch>
+```
+- Because of we have used other packages, these have to be included in "package.xml" file:
+```xml
+...
+  <exec_depend>robot_description</exec_depend>
+  <exec_depend>robot_state_publisher</exec_depend>
+  <exec_depend>gazebo_ros</exec_depend>
+...
+```
+- Now you can compile again
+```shell
+colcon build
+```
+**Here!**
+
+
 
 - provide the path to these new folders. This can be done in setup.py file. We have to add some lines at the begining to import some libraries and specify the folder paths:
 ```python
