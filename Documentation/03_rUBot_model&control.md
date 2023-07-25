@@ -107,8 +107,8 @@ Let's follow similar steps as previous section for robot_description package:
 ros2 pkg create robot_bringup
 ```
 - remove "src" and "include" folders
-- add "launch" folder
-- Install the launch folder modifying the "CMakeList.txt" file:
+- add "launch" "rviz" "worlds" folders
+- Install the folders modifying the "CMakeList.txt" file:
 ```shell
 cmake_minimum_required(VERSION 3.8)
 project(robot_bringup)
@@ -121,13 +121,13 @@ endif()
 find_package(ament_cmake REQUIRED)
 
 install(
-  DIRECTORY launch
+  DIRECTORY launch rviz worlds
   DESTINATION share/${PROJECT_NAME}/
 )
 
 ament_package()
 ```
-- create a new "robot_gazebo.launch.xml"
+- create a new "my_robot_gazebo.launch.xml"
 ```xml
 <launch>
     <let name="urdf_path" 
