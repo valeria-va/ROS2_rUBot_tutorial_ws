@@ -1,14 +1,36 @@
 ## **2. ROS2 rUBot model and Control**
 The objective of this section is to simulate the rUBot behaviour in virtual environment.
 
+Create a Control package in virtual environment
+
+First of all, we need to install Gazebo for ROS2 Humble version. The recommended version is Gazebo Garden. For this purpose, follow instructions in:
+- https://gazebosim.org/docs
+- https://gazebosim.org/docs/garden/install_ubuntu
+
+Install also Ignition Gazebo6:
+- https://gazebosim.org/api/gazebo/6.1/install.html
+
+Follow tutorial in:
+- https://gazebosim.org/docs/garden/tutorials
+- https://github.com/gazebosim/ros_gz
+- https://github.com/gazebosim/ros_gz/tree/ros2/ros_gz_sim
+- https://github.com/gazebosim/ros_gz/tree/ros2/ros_gz_sim_demos
+
+
+Interesting project to take into account:
+- https://github.com/noshluk2/ROS2-Raspberry-PI-Intelligent-Vision-Robot
+
+### **2.1. ROS2 rUBot model**
 The objectives of this section are:
-- Create a new "robot_description" package with 
-- Create a complete robot model
-- Spawn the robot model in a proper virtual world in gazebo environment
+- Create a new "rubot_description" package with 
+    - the rubot model in URDF format
+    - the different part models and custom designed worlds
+- Spawn the rubot model in a proper virtual world in gazebo environment
 
-A very good guide is deescribed in: https://www.udemy.com/course/ros2-tf-urdf-rviz-gazebo/learn/lecture/38688920#overview
+For that follow tutorial in:
+- https://docs.ros.org/en/humble/Tutorials/Advanced/Simulators/Gazebo.html
 
-### **2.1. Create a new "robot_description" package**
+#### **2.1.1. Create a new "robot_description" package**
 To create this package, type:
 ```shell
 ros2 pkg create robot_description
@@ -37,7 +59,7 @@ install(
 ament_package()
 ```
 - move to the ws and compile again
-- You can see the installed directories in "~/ROS2_rUBot_ws/install/robot_description/share/robot_description/" folders
+- You can see your model in "~/ROS2_rUBot_ws/install/robot_description/share/robot_description/urdf" folder
 
 Now everything is ready to create the **launch file**. This can be done in python but also in xml. We will do in xml language for simplicity and better understanding.
 - verify "launch" folder is created and CMakeList.txt is created properly
@@ -69,27 +91,7 @@ roslaunch robot_description display.launch.py
 ```
 >You will see the same as before
 
-### **2.2. Create a robot model**
-
-A first "my_robot.urdf" file is delivered to display a first robot model in rviz program.
-
-For a more complete robot model, it is suggested to use xacro format. This format will help you to better organize and scale your model with more functionalities.
-
-The gazebo functionalities are defined with plugins:
-- https://classic.gazebosim.org/tutorials?tut=ros_gzplugins
-- https://github.com/ros-simulation/gazebo_ros_pkgs/tree/ros2/gazebo_plugins/include/gazebo_plugins
-
-If you are using OpenCV, the frame used for the camera has a different orientation and you have to add a new link. This is explained and solved in:
-- https://answers.ros.org/question/232534/gazebo-camera-frame-is-inconsistent-with-rviz-opencv-convention/
-
-The complete "my_robot.urdf.xacro" is composed by different files:
-- my_robot.urdf.xacro (the main one)
-- mobile_base.xacro (with links and joints)
-- common_properties.xacro (with material and inertia properties)
-- mobile_base_gazebo.xacro (with differential_drive gazebo plugin)
-- camera.xacro (with camera plugin)
-
-The robot model defined in xacro format, can be displayed using the same launch files, you have only to change the name of robot model to "my_robot.urdf.xacro", in launch file:
+If your model is defined i xacro format, you can use the same launch files, you have only to change the name of robot model to "my_robot.urdf.xacro", in launch file:
 ```xml
 ...
 <let name="urdf_path" 
@@ -97,7 +99,8 @@ The robot model defined in xacro format, can be displayed using the same launch 
 ...
 ```
 
-### **2.3. Create a new robot_bringup package**
+
+#### **2.1.2. Create a new robot_bringup package**
 
 This is usually made to spawn the robot model in a proper virtual world in gazebo environment.
 
