@@ -57,3 +57,16 @@ ros2 topic pub -1 /set_joint_trajectory trajectory_msgs/msg/JointTrajectory '{he
 points: [ {positions: {0.0, 0.0}} ]}'
 ```
 
+# **5. Navigation2**
+
+You have to install some packages:
+```shell
+sudo apt install ros-humble-navigation2 ros-humble-nav2-bringup ros-humble-turtlebot3*
+sudo apt install terminator
+sudo snap install code --classic
+```
+you have to install extensions:
+- ROS from Microsoft
+- cMake from twxs
+
+slam...
