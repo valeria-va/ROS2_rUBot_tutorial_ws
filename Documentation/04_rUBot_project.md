@@ -76,4 +76,11 @@ Issue in ROS Humble when loading map. To solve it:
 sudo apt update
 sudo apt install ros-humble-rmw-cyclonedds-cpp
 ```
-slam...
+- and add line in bashrc file:
+```xml
+export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+```
+- now, if you are working with turtlebot3, you need to change some parameters in /opt/ros/humble/share/turtlebot3_navigation2/param/waffle.yaml
+- You will search for ROBOT_MODEL_TYPE and change to "nav2_amcl::DifferentialMotionModel"
+- reboot your computer
+
