@@ -2,6 +2,9 @@
 
 Installation will be made using Docker
 
+Bibliography:
+- Edouard Renard
+
 ## **1. ROS2 workspace and packages**
 
 The **ROS2 workspace** is the directory in your hard disk where your ROS2 packages reside to be usable by ROS2.
