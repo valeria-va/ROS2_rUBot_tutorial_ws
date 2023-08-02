@@ -69,4 +69,11 @@ you have to install extensions:
 - ROS from Microsoft
 - cMake from twxs
 
+Issue in ROS Humble when loading map. To solve it:
+- Change DDSfrom Fast to Cyclone
+
+```shell
+sudo apt update
+sudo apt install ros-humble-rmw-cyclonedds-cpp
+```
 slam...
