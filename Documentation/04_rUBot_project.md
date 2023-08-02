@@ -84,3 +84,21 @@ export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
 - You will search for ROBOT_MODEL_TYPE and change to "nav2_amcl::DifferentialMotionModel"
 - reboot your computer
 
+**Bringup turtlebot3**
+
+In a new terminal type:
+```shell
+ros2 launch turtlebot3_gazebo turtlebot3_world.launch.py
+```
+first time takes some minutes to open with all models
+
+**Navigation**
+
+Open a new terminal and type:
+```shell
+ros2 launch turtlebot3_navigation2 navigation2.launch.py use_sim_time:=True map:=maps/my_map.yaml
+```
+the rviz with the map appears
+
+- select three initial pose
+- select the goal pose
