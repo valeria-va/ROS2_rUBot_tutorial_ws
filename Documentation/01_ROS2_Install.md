@@ -1,4 +1,4 @@
-# **ROS2 Humble install2**
+# **ROS2 Humble install**
 
 
 ROS1 is close to finish and you can switch to ROS2
