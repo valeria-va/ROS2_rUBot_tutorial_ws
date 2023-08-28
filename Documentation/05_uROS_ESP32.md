@@ -15,6 +15,47 @@ It enables you to integrate ROS 2 capabilities into resource-constrained devices
 
 Here's a general outline of how you can get started with installing Micro-ROS on an ESP32:
 ## **1. Install micro-ROS**
+
+First of all you need to get acces to COM ports if you are using a docker. 
+
+By using --net=host, -v /dev:/dev, and --privileged, you're granting the Docker container extensive access to your host's system resources, including network and devices.
+
+```shell
+docker run --name ROS2_Humble_ports --net=host -v /dev:/dev --privileged -e DISPLAY=host.docker.internal:0.0 --mount src="C:\Users\puigm\Desktop\ROS_github\myPC_shared",dst=/home/myDocker_shared,type=bind -it osrf/ros:humble-desktop-full
+```
+```shell
+docker run --name ROS2_Humble_ports2 --net=host -v /dev:/dev -p "COM3":"ttyUSB3" --privileged -e DISPLAY=host.docker.internal:0.0 --mount src="C:\Users\puigm\Desktop\ROS_github\myPC_shared",dst=/home/myDocker_shared,type=bind -it osrf/ros:humble-desktop-full
+```
+
+Follow instructions on: 
+- https://micro.ros.org/docs/tutorials/core/first_application_rtos/freertos/
+- Video tutorial: https://www.youtube.com/watch?v=CLb9mmJQmrw
+
+
+Some tricks:
+- After colcon build if you have already created /firmware, delete it first:
+```shell
+sudo rm -rf firmware/
+```
+- create firmware for ESP32 (this takes a few minutes):
+```shell
+ros2 run micro_ros_setup create_firmware_ws.sh freertos esp32
+```
+- Our applications are located in firmware/freertos_apps/apps. This is where we have to save a new application. We will execute the "ping_pong" application.
+- Configure the firmware for our application:
+```shell
+ros2 run micro_ros_setup configure_firmware.sh ping_pong --transport serial
+```
+- Build the firmware to be able to later upload it to the ESP32
+```shell
+ros2 run micro_ros_setup build_firmware.sh
+```
+- Flashing the firmware:
+```shell
+ros2 run micro_ros_setup flash_firmware.sh
+´´´
+> Here the problem is to access to the ports within Docker
+
 **1.1. Install ESPIDF tool:**
 Follow instructions in: https://github.com/micro-ROS/micro_ros_espidf_component
 
