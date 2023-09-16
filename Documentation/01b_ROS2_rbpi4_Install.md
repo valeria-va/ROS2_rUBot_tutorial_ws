@@ -71,6 +71,12 @@ In order to properly communicate microROS sketch in ESP32 to ROS2 in RaspberryPi
 cd ~/ros2_ws/src
 git clone https://github.com/micro-ROS/micro-ROS-Agent.git -b humble
 ```
+- Install C++ compiler (g++)
+```shell
+sudo apt-get install g++
+export CXX=g++
+```
+- add this in ~/.bashrc
 - compile the new package
 ```shell
 cd ..
@@ -91,3 +97,4 @@ source install/local_setup.bash
 ```shell
 ros2 run micro_ros_agent micro_ros_agent serial --dev /dev/ttyUSB0
 ```
+- press enable button and there is
