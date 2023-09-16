@@ -27,6 +27,8 @@ ssh pi@192.168.54.219
     ```shell
     sudo service gdm3 restart
     ```
+    - Select the wifi to connect
+
 
 ## 1. **microROS Installation**
 
@@ -48,6 +50,44 @@ uROS for Arduino supports ESP32, for that we will have to:
 ```shell
 sudo snap install arduino
 ```
+> You will have to add pi user to the group (this appears as warning when executing arduino first time)
+```shell
+sudo usermod -a -G dialout pi
+```
 - Install on arduino IDE the ESP32 board from Espressif Systems version 2.0.2
+https://docs.espressif.com/projects/arduino-esp32/en/latest/installing.html
 - Connect ESP32 board
-- Add arduino uROS libraries
+- Add arduino uROS libraries: https://github.com/micro-ROS/micro_ros_arduino
+- Select Humble branch and download in zip
+- Add this library in arduino IDE
+- Select exemple "micro-ros_publisher.ino" and compile it
+- Now we will connect ESP32 to arduino USB and upload the sketch
+
+In order to properly communicate microROS sketch in ESP32 to ROS2 in RaspberryPi4, we need to install microROS Agent: https://github.com/micro-ROS/micro-ROS-Agent
+- Go to the microROS Agent web site and select Humble
+- copy the URL to clone this repository
+- clone the repository to src folder in raspberrypi4 ros2_ws project
+```shell
+cd ~/ros2_ws/src
+git clone https://github.com/micro-ROS/micro-ROS-Agent.git -b humble
+```
+- compile the new package
+```shell
+cd ..
+colcon build --symlink-install
+```
+- If there are some errors because it not find some other packages, we have to install dependencies for packages in ws. Type for that, first install rosdep2 package:
+```shell
+sudo apt install python3-rosdep2
+rosdep update
+rosdep install --from-paths src --ignore-src -r -y
+```
+- Compile again and source:
+```shell
+colcon build --symlink-install
+source install/local_setup.bash
+```
+- Now run the microROS app:
+```shell
+ros2 run micro_ros_agent micro_ros_agent serial --dev /dev/ttyUSB0
+```
