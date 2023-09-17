@@ -57,17 +57,21 @@ ssh pi@10.42.0.1
     sudo service gdm3 restart
     ```
 - With a remote Desktop Nomachine:
-    - In your raspberryPi4 install Nomachine In PC open NoMachine viewer
+    - In your raspberryPi4 install Nomachine (arm64, DEB package): https://downloads.nomachine.com/download/?id=107&distro=Raspberry&hw=Pi4
+
+    - In PC open NoMachine viewer
     - Select the raspberrypi IP address: 10.42.0.1
     - you have to specify:
-        - user: ubuntu
-        - password: ubuntu1234
+        - user: mpuig
+        - password: 1234
+    - Choose "scale remote display to the window"
     - You will have the raspberrypi4 desktop on your windows NoMachine screen
 
 ## **Install ROS2 Humble on Raspberrypi4**
 
 Follow instructions in: https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html
 
+I suggest to install ROS2 Humble Desktop
 
 **Install some needed packages**
 - Install ROSDEP2
@@ -102,16 +106,19 @@ uROS for Arduino supports ESP32, for that we will have to:
 ```shell
 sudo snap install arduino
 ```
-> You will have to add pi user to the group (this appears as warning when executing arduino first time)
+> You will have to add mpuig user to the group (this appears as warning when executing arduino first time)
 ```shell
-sudo usermod -a -G dialout pi
+sudo usermod -a -G dialout mpuig
 ```
+- run arduino
 - Install on arduino IDE the ESP32 board from Espressif Systems (version 2.0.2 or later)
 https://docs.espressif.com/projects/arduino-esp32/en/latest/installing.html
 - Connect ESP32 board
-- Add arduino uROS libraries: https://github.com/micro-ROS/micro_ros_arduino
-- Select Humble branch and download in zip
-- Add this library in arduino IDE
+- Select the ESP32 Dev Module board and port ttyUSB0
+- Add arduino uROS libraries: 
+    - https://github.com/micro-ROS/micro_ros_arduino
+    - Select Humble branch and download in zip
+    - Add this library in arduino IDE
 - Select exemple "micro-ros_publisher.ino" and compile it
 - Now we will connect ESP32 to arduino USB and upload the sketch
 
@@ -124,10 +131,15 @@ cd ~/ros2_ws/src
 git clone https://github.com/micro-ROS/micro-ROS-Agent.git -b humble
 ```
 
-- compile the new package
+- we have to install dependencies for packages in ws. Later we compile the new package
 ```shell
+rosdep init
+rosdep update
+cd src
+rosdep install --from-paths src --ignore-src -r -y
 cd ..
 colcon build --symlink-install
+source install/local_setup.bash
 ```
 - If there are some errors because it not find some other packages, we have to install dependencies for packages in ws. Type for that, first install rosdep2 package:
 ```shell
