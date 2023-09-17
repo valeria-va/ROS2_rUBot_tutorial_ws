@@ -11,6 +11,26 @@ You can follow the instructions on:
 - https://roboticsbackend.com/install-ros2-on-raspberry-pi/
 - https://github.com/ros-realtime/ros-realtime-rpi4-image
 
+- Install Ubuntu22 on Raspberrypi4:
+    - Use RaspberryPi Imager and choose Ubuntu22 Desktop (64bits)
+    - Connect ethernet cable to your raspberrypi4
+    - Insert SD card in RBPI4 and switch on
+    - select Language and keyboard 
+    - Select:
+        - username: mpuig
+        - Password: 1234
+    - Select your wifi
+    - Configure a hotspot:
+        - Select wifi settings
+        - Turn on hotspot
+            - name: rubot_ros2
+            - pass: rubot_ros2
+        - Make the connection "Hotspot" start automatically:
+        ```shell
+        nmcli con mod Hotspot connection.autoconnect yes
+        ```
+    - reboot
+
 Make sure you have selected:
 - user: pi
 - Pass: 1234
