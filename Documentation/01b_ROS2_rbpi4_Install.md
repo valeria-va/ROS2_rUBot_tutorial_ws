@@ -29,6 +29,18 @@ ssh pi@192.168.54.219
     ```
     - Select the wifi to connect
 
+**Install some needed packages**
+- Install ROSDEP2
+```shell
+sudo apt install python3-rosdep2
+rosdep update
+```
+- Install C++ compiler (g++)
+```shell
+sudo apt-get install g++
+export CXX=g++
+```
+> add this last instruction "export" in ~/.bashrc
 
 ## 1. **microROS Installation**
 
@@ -54,7 +66,7 @@ sudo snap install arduino
 ```shell
 sudo usermod -a -G dialout pi
 ```
-- Install on arduino IDE the ESP32 board from Espressif Systems version 2.0.2
+- Install on arduino IDE the ESP32 board from Espressif Systems (version 2.0.2 or later)
 https://docs.espressif.com/projects/arduino-esp32/en/latest/installing.html
 - Connect ESP32 board
 - Add arduino uROS libraries: https://github.com/micro-ROS/micro_ros_arduino
@@ -71,12 +83,7 @@ In order to properly communicate microROS sketch in ESP32 to ROS2 in RaspberryPi
 cd ~/ros2_ws/src
 git clone https://github.com/micro-ROS/micro-ROS-Agent.git -b humble
 ```
-- Install C++ compiler (g++)
-```shell
-sudo apt-get install g++
-export CXX=g++
-```
-- add this in ~/.bashrc
+
 - compile the new package
 ```shell
 cd ..
@@ -86,6 +93,7 @@ colcon build --symlink-install
 ```shell
 sudo apt install python3-rosdep2
 rosdep update
+cd src
 rosdep install --from-paths src --ignore-src -r -y
 ```
 - Compile again and source:
@@ -97,4 +105,11 @@ source install/local_setup.bash
 ```shell
 ros2 run micro_ros_agent micro_ros_agent serial --dev /dev/ttyUSB0
 ```
-- press enable button and there is
+- press enable button to stablish communication
+- Verify the topic list and the publication of the sketch:
+```shell
+ros2 topic list
+ros2 topic echo /micro_ros_arduino_node_publisher
+```
+
+
