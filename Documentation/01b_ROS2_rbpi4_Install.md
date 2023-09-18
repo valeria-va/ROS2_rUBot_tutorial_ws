@@ -56,7 +56,7 @@ ssh pi@10.42.0.1
     ```shell
     sudo service gdm3 restart
     ```
-- With a remote Desktop Nomachine:
+- With a remote Desktop **Nomachine** (recommended):
     - In your raspberryPi4 install Nomachine (arm64, DEB package): https://downloads.nomachine.com/download/?id=107&distro=Raspberry&hw=Pi4
 
     - In PC open NoMachine viewer
@@ -71,9 +71,9 @@ ssh pi@10.42.0.1
 
 Follow instructions in: https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html
 
-I suggest to install ROS2 Humble Desktop
+I suggest to install **ros-humble-desktop**
 
-**Install some needed packages**
+If you have installed "ros-humble-ros-base", you will need to:
 - Install ROSDEP2
 ```shell
 sudo apt install python3-rosdep2
@@ -113,6 +113,7 @@ sudo usermod -a -G dialout mpuig
 - run arduino
 - Install on arduino IDE the ESP32 board from Espressif Systems (version 2.0.2 or later)
 https://docs.espressif.com/projects/arduino-esp32/en/latest/installing.html
+- Update the Boards firmware if needed
 - Connect ESP32 board
 - Select the ESP32 Dev Module board and port ttyUSB0
 - Add arduino uROS libraries: 
@@ -133,27 +134,15 @@ git clone https://github.com/micro-ROS/micro-ROS-Agent.git -b humble
 
 - we have to install dependencies for packages in ws. Later we compile the new package
 ```shell
+cd ~/ros2_ws
 rosdep init
 rosdep update
-cd src
 rosdep install --from-paths src --ignore-src -r -y
-cd ..
 colcon build --symlink-install
 source install/local_setup.bash
 ```
-- If there are some errors because it not find some other packages, we have to install dependencies for packages in ws. Type for that, first install rosdep2 package:
-```shell
-sudo apt install python3-rosdep2
-rosdep update
-cd src
-rosdep install --from-paths src --ignore-src -r -y
-```
-- Compile again and source:
-```shell
-colcon build --symlink-install
-source install/local_setup.bash
-```
-- Now run the microROS app:
+
+- Now run the microROS agent:
 ```shell
 ros2 run micro_ros_agent micro_ros_agent serial --dev /dev/ttyUSB0
 ```
@@ -163,5 +152,5 @@ ros2 run micro_ros_agent micro_ros_agent serial --dev /dev/ttyUSB0
 ros2 topic list
 ros2 topic echo /micro_ros_arduino_node_publisher
 ```
-
+Congratulations!. You have now the micoros agent working and you have good communication between ESP32 and RaspberryPi4!!
 
