@@ -110,6 +110,7 @@ sudo snap install arduino
 ```shell
 sudo usermod -a -G dialout mpuig
 ```
+> You have to shutdown the RaspberryPi4 before continue with the installation!!
 - run arduino
 - Install on arduino IDE the ESP32 board from Espressif Systems (version 2.0.2 or later)
 https://docs.espressif.com/projects/arduino-esp32/en/latest/installing.html
