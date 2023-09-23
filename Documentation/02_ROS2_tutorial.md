@@ -3,7 +3,8 @@
 Installation will be made using Docker
 
 Bibliography:
-- Edouard Renard
+- Edouard Renard: https://www.udemy.com/course/ros2-for-beginners/learn/lecture/21305270#overview
+
 
 ## **1. ROS2 workspace and packages**
 
@@ -85,6 +86,9 @@ colcon build --packages-select <package_name>
 In ROS2, each node should be responsible for a single module (e.g., one node for controlling wheel motors, one for controlling a LIDAR control, etc.). Each node can communicate with other nodes through different methods.
 
 A full robotic system is comprised of many nodes working together. In ROS2, a single executable (a C++ or Python program, etc.) can contain one node.
+ROS2 nodes are:
+- Subprograms in your application, responsible for only one thing
+- communicate with each other through topics, services and parameters
 
 **Create first ROS2 Program**
 
