@@ -102,20 +102,23 @@ Each node is created within a python program in "src/ros2_tutorial/ros2_tutorial
 
 You can create Publisher and Subscriber python files using speciffic templates.
 
-Next step is to generate an executable from the python scripts you created. This is done in the "setup.py" file. The **setup.py** file contains all the necessary instructions for properly compiling your package. To do that, you work with a dictionary named entry_points. Inside it, you find an array called console_scripts.
+Next step is to generate an executable from the python scripts you created:
+- In "setup.cfg": you will specify where do you install the node (install/ros2_tutorial/lib/ros2_tutorial)
+- In the **setup.py**: file contains all the necessary instructions for properly compiling your package. To do that, you work with a dictionary named entry_points. 
+    - Inside it, you find an array called console_scripts.
 
-- Add entry points for Publisher and Subscriber
+    - Add entry points for Publisher and Subscriber
     
-    Reopen setup.py and add the entry point for the subscriber node below the publisher’s entry point. The entry_points field should now look like this:
-    ```python
-    entry_points={
-        'console_scripts': [
-                'publisher_node = ros2_tutorial.publisher_hello:main',
-                'subscriber_node = ros2_tutorial.subscriber_hello:main',
-        ],
-    },
-    ```
-You can see these lines as follows:    '<executable_name> = <package_name>.<script_name>:main'
+        Reopen setup.py and add the entry point for the subscriber node below the publisher’s entry point. The entry_points field should now look like this:
+        ```python
+        entry_points={
+            'console_scripts': [
+                    'publisher_node = ros2_tutorial.publisher_hello:main',
+                    'subscriber_node = ros2_tutorial.subscriber_hello:main',
+            ],
+        },
+        ```
+        You can see these lines as follows:    '<executable_name> = <package_name>.<script_name>:main'
 
 - Compile inside ws: 
     ```shell
@@ -126,6 +129,19 @@ You can see these lines as follows:    '<executable_name> = <package_name>.<scri
     ros2 run ros2_tutorial publisher_node
     ros2 run ros2_tutorial subscriber_node
     ```
+- You can also run the nodes from the folder where the nodes are installed
+    ```shell
+    cd install/ros2_tutorial/lib/ros2_tutorial
+    ./publisher_node
+    ./subscriber_node
+    ```
+Take into account that, the name of:
+- the python file (publisher_hello.py)
+- the node (simple_publisher)
+- the executable (publisher_node)
+
+Could be different!!
+
 ## **3. Create Launch files**
 
 ROS2 programs can be run:
