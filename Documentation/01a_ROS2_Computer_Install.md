@@ -78,6 +78,9 @@ sudo apt install ros-dev-tools
 apt install -y git && apt install -y python3-pip
 sudo apt install python3-colcon-common-extensions
 sudo pip3 install setuptools==58.2.0
+sudo apt -y install ament-cmake
+rosdep update
+rosdep install --from-paths src -y --ignore-src
 ```
 
 The documentation will be found in: https://docs.ros.org/en/humble/index.html
