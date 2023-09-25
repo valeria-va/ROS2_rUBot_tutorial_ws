@@ -142,8 +142,31 @@ Take into account that, the name of:
 
 Could be different!!
 
-## **3. Create Launch files**
+**Debug and monitor nodes**
 
+You have different functions to debug and monitor:
+- ros2 node -h
+- ros2 node list
+- ros2 node info /node
+
+You can run a node with a different name:
+- ros2 run pkg node --ros-args --remap __node:=abc
+
+You can compile a speciffic package and launch not the executable but the python file in src (we do not need to compile every time we make a change in the python file!):
+- colcon build --packages-select ros2_tutorial --symlink-install
+
+Rqt and rqt_graph tools
+
+You can practice with Turtlesim_node
+```shell
+ros2 run turtlesim turtlesim_node
+ros2 run turtlesim turtle_teleop_key
+ros2 run turtlesim turtlesim_node --ros-args -r __node:=my_turtle
+```
+
+## **3. Create Launch files**
+ Usually we create a "robot_bringup" package to locate the launch files. These launch files can take nodes from all other packages.
+ 
 ROS2 programs can be run:
 - from executable files
 - from launch files. 
