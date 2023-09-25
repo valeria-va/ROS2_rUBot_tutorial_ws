@@ -165,7 +165,7 @@ ros2 run turtlesim turtlesim_node --ros-args -r __node:=my_turtle
 ```
 
 ## **3. Create Launch files**
- Usually we create a "robot_bringup" package to locate the launch files. These launch files can take nodes from all other packages.
+ Usually we create a "robot_bringup" package to locate the launch files. These launch files can take nodes from all other packages. We will create this package in the next section when we will work in a real tobot project. For this first tutorial, we will use the same package to add some launch files.
  
 ROS2 programs can be run:
 - from executable files

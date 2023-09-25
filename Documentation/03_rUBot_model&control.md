@@ -167,3 +167,7 @@ You can now bringup your robot in the designed world
 ```shell
 ros2 launch my_robot_bringup my_robot_gazebo.launch.xml
 ```
+
+**Activity:**
+
+Bringup your rUBot model within the real custom designed World
