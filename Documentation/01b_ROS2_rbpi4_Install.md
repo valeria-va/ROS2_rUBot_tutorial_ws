@@ -114,6 +114,7 @@ The procedure is:
 6. **Reduce size of image**: PiShrink is a script specifically designed for Raspberry Pi images. It can shrink a full image to a smaller size based on the actual data size, removing unused space. First, you need to install PiShrink:
 
 ```bash
+cd /home/mpuig
 git clone https://github.com/Drewsif/PiShrink.git
 cd PiShrink
 sudo chmod +x pishrink.sh
@@ -121,7 +122,8 @@ sudo chmod +x pishrink.sh
 7. **Shrink the Image**: Run PiShrink on your full image to reduce its size:
 
 ```bash
-sudo ./pishrink.sh full_image.img
+cd /media/mpuig/usb_backup2
+sudo ~/PiShrink/pishrink.sh Humble_full_rbpi4.img Humble_full_rbpi_shrink.img
 ```
 This script will automatically reduce the size of the image file to fit the actual data size and removes unused space.
 
@@ -136,3 +138,15 @@ ls -lh /path/to/your/image.img
 ```
 > If your SD card has 16 GB of storage but you're only using 4 GB of that space, the image file will be around 4 GB in size.
 - If you are using "RaspberryPi Imager" use the "Use custom" option to select the image location in your pendrive.
+- The new SD card will have the size of the "full_image_shrink.img" to expand it to the total size of SD card:
+```bash
+sudo apt install raspi-config
+sudo raspi-config
+```
+- Navigate to "Advanced Options": Use the arrow keys to navigate to "Advanced Options" and press Enter.
+
+- Select "Expand Filesystem": In the "Advanced Options" menu, select "Expand Filesystem" and press Enter.
+
+- Confirm Resize: Follow the on-screen prompts to confirm the resizing of the filesystem. This will resize the root filesystem to utilize the full available space on the SD card.
+
+- Reboot: After the resizing is complete, you will be prompted to reboot. Select "Finish" and then choose to reboot.
