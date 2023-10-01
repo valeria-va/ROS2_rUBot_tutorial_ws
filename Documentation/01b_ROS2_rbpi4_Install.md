@@ -86,3 +86,39 @@ export CXX=g++
 ```
 > add this last instruction "export" in ~/.bashrc
 
+## **Make a backup of Raspberrypi4 SD card**
+
+To copy this card already installed to another SD card, you will have to make a backup of your original SD card.
+
+The procedure is:
+
+1. **Insert an External Storage Device**: Insert an external storage device (e.g., a USB drive) into one of the USB ports on your Raspberry Pi. This USB has to be formated to NTFS format to accept files larger than 4GBytes!
+
+2. **Identify the SD Card and USB paths**: Determine the device name of your SD card an USB. You can use the `lsblk` or `fdisk -l` command to list the connected drives and identify the SD card. It typically has a device name like "/dev/mmcblk0" for SD original card and "/media/mpuig/usb_backup2/" for the pendrive connected to USB port.
+
+3. **Create the Image**: Use the `dd` command to create an image of the SD card and save it directly to the external storage device. For example:
+
+   ```bash
+   sudo dd if=/dev/mmcblk0 of=/media/mpuig/usb_backup2/Humble_rbpi4.img bs=4M status=progress
+   ```
+
+   - `if`: Input file (the SD card).
+   - `of`: Output file (the image file on the external drive).
+   - `bs`: Block size (use 4M for better performance).
+   - `status=progress`: Display progress information while creating the image.
+
+4. **Wait for Completion**: The `dd` command may take some time to complete, depending on the size of your SD card. Be patient and let it finish.
+
+5. **Eject the External Drive**: Once the image creation is complete, safely eject the external storage device from your Raspberry Pi.
+
+Now you have an image file of your Raspberry Pi's SD card saved on the external storage device, which you can use for backup, cloning, or restoring your Raspberry Pi's operating system and data.
+
+## **Restore an image to another Raspberrypi4 SD card**
+
+To restore the created image, you can use "Balena Etcher" or "RaspberryPi Imager" softwares.
+- Identify the size of the data to be restores from the image:
+```bash
+ls -lh /path/to/your/image.img
+```
+> If your SD card has 16 GB of storage but you're only using 4 GB of that space, the image file will be around 4 GB in size.
+- If you are using "RaspberryPi Imager" use the "Use custom" option to select the image location in your pendrive.
