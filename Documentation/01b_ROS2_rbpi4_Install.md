@@ -111,6 +111,20 @@ The procedure is:
 
 5. **Eject the External Drive**: Once the image creation is complete, safely eject the external storage device from your Raspberry Pi.
 
+6. **Reduce size of image**: PiShrink is a script specifically designed for Raspberry Pi images. It can shrink a full image to a smaller size based on the actual data size, removing unused space. First, you need to install PiShrink:
+
+```bash
+git clone https://github.com/Drewsif/PiShrink.git
+cd PiShrink
+sudo chmod +x pishrink.sh
+```
+7. **Shrink the Image**: Run PiShrink on your full image to reduce its size:
+
+```bash
+sudo ./pishrink.sh full_image.img
+```
+This script will automatically reduce the size of the image file to fit the actual data size and removes unused space.
+
 Now you have an image file of your Raspberry Pi's SD card saved on the external storage device, which you can use for backup, cloning, or restoring your Raspberry Pi's operating system and data.
 
 ## **Restore an image to another Raspberrypi4 SD card**
