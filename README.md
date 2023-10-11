@@ -12,6 +12,11 @@ https://docs.ros.org/en/humble/index.html
 
 
 ## ROS2 rUBot project
+
+The included projects are:
+- GopiGo3 for ROS2 Humble: https://github.com/slowrunner/ROS2-GoPiGo3#headless-setup-for-a-ros2-gopigo3-robot
+- rUBot mecanum for ROS2 Humble: https://www.udemy.com/course/ros2-tf-urdf-rviz-gazebo/learn/lecture/38689312?start=15#overview
+
 The structure is based on simulated environment and hardware implementation files description:
 - rUBot model and control
 - rUBot bringup and control hardware
