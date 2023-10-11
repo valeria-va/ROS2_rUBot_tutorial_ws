@@ -3,7 +3,7 @@
 In this section we will practice the ROS2 concepts and different performances:
 - Turtlesim environment
 - Turtlesim control with a joystick (linebot)
-- Turtlesim follow-me project (Edouard Renard)
+- Turtlesim follow-me project: https://www.udemy.com/course/ros2-for-beginners/learn/lecture/21306698?start=1#overview
 
 ## **1. Turtlesim environment**
 
