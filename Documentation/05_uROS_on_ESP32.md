@@ -33,8 +33,6 @@ https://docs.espressif.com/projects/arduino-esp32/en/latest/installing.html
     - https://github.com/micro-ROS/micro_ros_arduino
     - Select Humble branch and download in zip
     - Add this library in arduino IDE
-- Select exemple "micro-ros_publisher.ino" and compile it
-- Now we will connect ESP32 to arduino USB and upload the sketch
 
 In order to properly communicate microROS sketch in ESP32 to ROS2 in RaspberryPi4, we need to install microROS Agent: https://github.com/micro-ROS/micro-ROS-Agent
 - Go to the microROS Agent web site and select Humble
@@ -54,8 +52,10 @@ rosdep install --from-paths src --ignore-src -r -y
 colcon build --symlink-install
 source install/local_setup.bash
 ```
-
-- Now run the microROS agent:
+Now you can run a sketch in arduino ESP32:
+- Select exemple "micro-ros_publisher.ino" and compile it
+- Connect ESP32 to arduino USB and upload the sketch
+- Run the microROS agent:
 ```shell
 ros2 run micro_ros_agent micro_ros_agent serial --dev /dev/ttyUSB0
 ```
@@ -66,4 +66,32 @@ ros2 topic list
 ros2 topic echo /micro_ros_arduino_node_publisher
 ```
 Congratulations!. You have now the micoros agent working and you have good communication between ESP32 and RaspberryPi4!!
+
+**First exemple**
+
+Let's upload the micro-ros_subscriber_twist.ino exemple to our ESP32
+
+Now run the micr-ros agent:
+```shell
+ros2 run micro_ros_agent micro_ros_agent serial --dev /dev/ttyUSB0
+```
+Press enable button and the ESP32 will be connected
+
+Open a new terminal an type:
+```shell
+ros2 topic list
+```
+You will see the topic: micro_ros_arduino_twist_subscriber
+
+In the same terminal listen to this topic
+```shell
+ros2 topic echo /micro_ros_arduino_twist_subscriber 
+```
+
+In a new terminal publish to this topic with:
+```shell
+ros2 run teleop_twist_keyboard teleop_twist_keyboard --args -ros -remap /cmd_vel:=/micro_ros_arduino_twist_subscriber
+```
+![](./Images/05_uROS/01_rqt_subs.png)
+
 
