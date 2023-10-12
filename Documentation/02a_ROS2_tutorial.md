@@ -61,7 +61,7 @@ pip3 install setuptools==58.2.0
    - export AMENT_PREFIX_PATH=""
    - export CMAKE_PREFIX_PATH=""
 
-Source the workspace. Be sure in .bashrc file (in root folder) to have:
+Source the workspace. Be sure in .bashrc (with docker is from root) file to have:
 ```shell
 source /opt/ros/humble/setup.bash 
 source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
@@ -80,6 +80,10 @@ Some interesting commands:
 Sometimes (for large projects), you will not want to compile all of your packages. This would take such a long time. So instead, you can use the following command to compile only the packages where you have made changes:
 ```shell
 colcon build --packages-select <package_name>
+```
+You can compile a speciffic package and launch not the executable but the python file in src (we do not need to compile every time we make a change in the python file!):
+```shell
+colcon build --packages-select ros2_tutorial --symlink-install
 ```
 
 ## **2. ROS2 Nodes**

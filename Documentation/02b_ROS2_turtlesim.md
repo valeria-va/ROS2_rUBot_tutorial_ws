@@ -7,6 +7,23 @@ In this section we will practice the ROS2 concepts and different performances:
 
 ## **1. Turtlesim environment**
 
+Turtlesim is a package that contains a 2D turtle robot simulation and is a good opportunity to apply what we have learnes of ROS2 in the previous chapter.
+
+We will start with the main turtlesim node with:
+```shell
+ros2 run turtlesim turtlesim_node
+```
+![](./Images/02_ROS2_tutorial/01_turtlesim.png)
+
+We can verify the nodes:
+```shell
+ros2 node list
+```
+We will start another node to control the turtlesim robot
+```shell
+ros2 run turtlesim turtle_teleop_key
+```
+
 
 ## **2. Turtlesim control with a joystick**
 
