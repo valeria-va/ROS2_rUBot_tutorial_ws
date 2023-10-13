@@ -127,6 +127,14 @@ sudo ~/PiShrink/pishrink.sh Humble_full_rbpi4.img Humble_full_rbpi_shrink.img
 ```
 This script will automatically reduce the size of the image file to fit the actual data size and removes unused space.
 
+You have also another **tool: gzip** (recommended!)
+
+Open a terminal in the folder where you have the image to compact:
+```shell
+gzip your_image.img
+```
+This will give you a compacted image with extension your_image.img.gz. You can use RaspberryPi Imager to write directly the compacted image to a 32GB SD card.
+
 Now you have an image file of your Raspberry Pi's SD card saved on the external storage device, which you can use for backup, cloning, or restoring your Raspberry Pi's operating system and data.
 
 ## **Restore an image to another Raspberrypi4 SD card**
