@@ -44,7 +44,13 @@ sudo nm-connection-editor
 ```
 
 **Connect to the rbpi4:**
-- remotelly with SSH
+
+First time we have to configure your Raspberry Pi to allow graphical desktop remote connections:
+- In Ubuntu settings select **sharing**
+- Activate sharing (for Nomachine remote desktop)
+- Activate "Remote Login" (for ssh connection)
+
+a) remotelly with **SSH**
 ```shell
 cmd
 ssh pi@10.42.0.1
@@ -56,16 +62,18 @@ ssh pi@10.42.0.1
     ```shell
     sudo service gdm3 restart
     ```
-- With a remote Desktop **Nomachine** (recommended):
-    - In your raspberryPi4 install Nomachine (arm64, DEB package): https://downloads.nomachine.com/download/?id=107&distro=Raspberry&hw=Pi4
 
-    - In PC open NoMachine viewer
-    - Select the raspberrypi IP address: 10.42.0.1
-    - you have to specify:
-        - user: mpuig
-        - password: 1234
-    - Choose "scale remote display to the window"
-    - You will have the raspberrypi4 desktop on your windows NoMachine screen
+b) With a remote Desktop **Nomachine** (recommended):
+
+- In your raspberryPi4 install Nomachine (arm64, DEB package): https://downloads.nomachine.com/download/?id=107&distro=Raspberry&hw=Pi4
+- In PC open NoMachine viewer
+- Select the raspberrypi IP address: 10.42.0.1
+- you have to specify:
+    - user: mpuig
+    - password: 1234
+- Choose "scale remote display to the window"
+- You will have the raspberrypi4 desktop on your windows NoMachine screen
+
 
 ## **Install ROS2 Humble on Raspberrypi4**
 
