@@ -53,9 +53,10 @@ First time we have to configure your Raspberry Pi to allow graphical desktop rem
 a) remotelly with **SSH**
 ```shell
 cmd
-ssh pi@10.42.0.1
+ssh mpuig@10.42.0.1
 ```
 > Perhaps the security Key will be reestablished and you will need to delete the line for the old key in C:\Users\puigm\ .ssh\known_hosts
+> Comment the line with the 10.42.0.1 IP to stablish another security key
 - With screen and keyboard
 
     - Sometimes when you connect a USB the screen service is corrupted. Then reestart the service from the remote connection:
@@ -65,6 +66,7 @@ ssh pi@10.42.0.1
 
 b) With a remote Desktop **Nomachine** (recommended):
 
+To have the graphical interface available, you will need to connect a HDMI dongle in the microHDMI Connector!
 - In your raspberryPi4 install Nomachine (arm64, DEB package): https://downloads.nomachine.com/download/?id=107&distro=Raspberry&hw=Pi4
 - In PC open NoMachine viewer
 - Select the raspberrypi IP address: 10.42.0.1
