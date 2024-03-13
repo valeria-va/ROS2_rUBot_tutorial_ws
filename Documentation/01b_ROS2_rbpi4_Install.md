@@ -197,7 +197,7 @@ chmod +x  ~/Downloads/xrdp-installer-1.4.8.sh
 ```shell
 sudo docker pull ros:humble-ros-core
 sudo docker run -it --rm ros:humble-ros-core
-sudo docker run --name ROS2_Humble_osrf3 -e DISPLAY=host.docker.internal:0.0 -it --rm ros:humble-ros-core
+sudo docker run --name ROS2_Humble_osrf -e DISPLAY=host.docker.internal:0.0 -it --rm ros:humble-ros-core
 ```
 List the containers:
 ```shell
