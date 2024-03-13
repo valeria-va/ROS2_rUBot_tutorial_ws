@@ -168,3 +168,49 @@ sudo raspi-config
 - Confirm Resize: Follow the on-screen prompts to confirm the resizing of the filesystem. This will resize the root filesystem to utilize the full available space on the SD card.
 
 - Reboot: After the resizing is complete, you will be prompted to reboot. Select "Finish" and then choose to reboot.
+
+## **Install ROS2 Humble on RaspberryPi5!!**
+
+
+RaspberryPi5 works on Ubuntu23 and the Installation process is:
+- Save image of Ubuntu23 Desktop from Raspberry Imager
+- Connect Monitor and keyboard
+- select network
+- Install XRDP from instructions in: https://c-nergy.be/blog/?p=19228
+```shell
+wget https://www.c-nergy.be/downloads/xRDP/xrdp-installer-1.4.8.zip
+unzip xrdp-installer-1.4.8.zip 
+chmod +x  ~/Downloads/xrdp-installer-1.4.8.sh
+./xrdp-installer-1.4.8.sh -s -l  
+```
+- Reboot
+- On your computer, select the hotspot:
+    ISSD: "rUBot_5_01"
+    Pass: mpuig1234
+- Open "Remote Desktop" and select:
+    - Ip: 10.42.0.1
+    - user: mpuig
+    - pass: 1234
+
+- Install ROs2 Humble from Docker: 
+    - Follow instructions in: https://docs.ros.org/en/humble/How-To-Guides/Installing-on-Raspberry-Pi.html#raspberry-pi-os-with-ros-2-in-docker
+```shell
+sudo docker pull ros:humble-ros-core
+sudo docker run -it --rm ros:humble-ros-core
+sudo docker run --name ROS2_Humble_osrf3 -e DISPLAY=host.docker.internal:0.0 -it --rm ros:humble-ros-core
+```
+List the containers:
+```shell
+sudo docker ps -q
+```
+Stop/Remove container
+```shell
+sudo docker stop afa800661dc0
+sudo docker rm afa800661dc0
+```
+- Update packages
+```shell
+apt update
+apt upgrade
+```
+Follow tutorials: https://docs.ros.org/en/humble/Tutorials.html
