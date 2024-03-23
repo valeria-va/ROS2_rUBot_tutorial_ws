@@ -26,12 +26,12 @@ Every **Python package** will have the following structure of files and folders:
 
 Some packages might contain extra folders. For instance, the launch folder contains the package's launch files 
 
-We wil use the "ROS2_rUBot_ws" as starting workspace for this project.
+We wil use the "ROS2_rUBot_tutorial_ws" as starting workspace for this project.
 
 You open a terminal in this Container using VS Code:
 ```shell
 cd /home
-git clone https://github.com/manelpuig/ROS2_rUBot_ws
+git clone https://github.com/manelpuig/ROS2_rUBot_tutorial_ws
 ```
 **Create a new package**
 
