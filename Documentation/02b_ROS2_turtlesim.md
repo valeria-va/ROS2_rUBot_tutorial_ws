@@ -23,3 +23,10 @@ We will start another node to control the turtlesim robot
 ```shell
 ros2 run turtlesim turtle_teleop_key
 ```
+## **. Turtlesim “Catch Them All” project**
+
+Time to start your first complete project with ROS2!
+
+For this project you will use the Turtlesim package as a simulation tool, so you can visualize what the robot is doing.
+
+Make sure you've watched the previous video to see what you'll get at the end of this project.
