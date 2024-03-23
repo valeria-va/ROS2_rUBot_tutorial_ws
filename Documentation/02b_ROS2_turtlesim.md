@@ -23,22 +23,3 @@ We will start another node to control the turtlesim robot
 ```shell
 ros2 run turtlesim turtle_teleop_key
 ```
-
-
-## **2. Turtlesim control with a joystick**
-
-You will install the package: https://index.ros.org/p/teleop_twist_joy/github-ros2-teleop_twist_joy/
-
-You will use the github page (Humble branch): https://github.com/ros2/teleop_twist_joy/tree/humble
-
-```shell
-cd /home/mpuig/ros2_ws/src
-git clone https://github.com/ros2/teleop_twist_joy.git -b humble
-cd ..
-colcon build --symlink-install
-source install/setup.bash
-```
-Launch the node:
-```shell
-ros2 launch teleop_twist_joy teleop-launch.py joy_config:='xbox'
-```

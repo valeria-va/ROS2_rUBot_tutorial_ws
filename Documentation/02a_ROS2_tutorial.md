@@ -45,7 +45,7 @@ ros2 pkg create --build-type ament_python ros2_tutorial --dependencies rclpy
 
 Now you have to build the created ws:
 ```shell
-cd /home/ROS2_rUBot_ws
+cd /home/ROS2_rUBot_tutorial_ws
 colcon build
 ```
 In ROS2 Humble some errors/warnings arise:
@@ -65,8 +65,8 @@ Source the workspace. Be sure in .bashrc (with docker is from root) file to have
 ```shell
 source /opt/ros/humble/setup.bash 
 source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
-cd /home/ROS2_rUBot_ws
-source /home/ROS2_rUBot_ws/install/setup.bash
+cd /home/ROS2_rUBot_tutorial_ws
+source /home/ROS2_rUBot_tutorial_ws/install/setup.bash
 ```
 You are ready to work with this workspace
 
@@ -113,7 +113,7 @@ Next step is to generate an executable from the python scripts you created:
 
     - Add entry points for Publisher and Subscriber
     
-        Reopen setup.py and add the entry point for the subscriber node below the publisher’s entry point. The entry_points field should now look like this:
+        Open setup.py and add the entry point for the publisher and subscriber nodes. The entry_points field should now look like this:
         ```python
         entry_points={
             'console_scripts': [
@@ -169,7 +169,7 @@ ros2 run turtlesim turtlesim_node --ros-args -r __node:=my_turtle
 ```
 
 ## **3. Create Launch files**
- Usually we create a "robot_bringup" package to locate the launch files. These launch files can take nodes from all other packages. We will create this package in the next section when we will work in a real tobot project. For this first tutorial, we will use the same package to add some launch files.
+ Usually we create a "robot_bringup" package to locate the launch files. These launch files can take nodes from all other packages. We will create this package in the next section when we will work in a real robot project. For this first tutorial, we will use the same package to add some launch files.
  
 ROS2 programs can be run:
 - from executable files
@@ -183,7 +183,7 @@ The launch system in ROS 2 is responsible for helping the user describe the conf
 
 To create a launch file we have to:
 - create a "launch" folder in "src/ros2_tutorial/"
-- Inside create the launch file in different formats (python or XML)
+- Inside create the launch file in different formats (python, XML or YAML)
 - Enable the execution of all files in "launch" folder. For that you have to open "setup.py" file and make some modifications to:
     - Import some libraries
     ```shell
