@@ -3,7 +3,9 @@
 Installation will be made using Docker
 
 Bibliography:
+- RO2 Humble official doc: https://docs.ros.org/en/humble/
 - Edouard Renard: https://www.udemy.com/course/ros2-for-beginners/learn/lecture/21305270#overview
+- ROS2 Basics in 5 Days (Python): https://www.robotigniteacademy.com/courses/268
 
 
 ## **1. ROS2 workspace and packages**
