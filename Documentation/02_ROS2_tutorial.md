@@ -19,24 +19,36 @@ In ROS2, you can create two types of packages: Python packages and CMake (C++) p
 Every **Python package** will have the following structure of files and folders:
 
 - package.xml - File containing meta-information about the package (maintainer of the package, dependencies, etc.).
-
-- setup.py - File containing instructions for how to compile the package.
-
+- setup.py - File containing instructions for how to compile the package: define the executables, install the extra folders, etc
 - setup.cfg - File that defines where the scripts will be installed.
-
 - /<package_name> - This directory will always have the same name as your package. You will put all your Python scripts inside this folder. Note that it already contains an empty "__init__.py" file.
+
+Every **CMake package** will have the following structure of files and folders:
+- CMakeLists.txt file that describes how to build the code within the package (i.e. install the extra folders, etc)
+- include/<package_name> directory containing the public headers for the package
+- package.xml file containing meta information about the package (maintainer of the package, dependencies, etc.).
+- src directory containing the source code for the package
 
 Some packages might contain extra folders. For instance, the launch folder that contains the package's launch files 
 
-
 **Create a new package**
 
-Every time you want to create a package, you have to be in this directory src. Type into your Webshell the following command:
+Every time you want to create a package, you have to be in the src directory 
+
+Type for a **python package**:
 ```shell
-ros2 pkg create --build-type ament_python my_package --dependencies rclpy
-For exemple
-ros2 pkg create --build-type ament_python ros2_tutorial --dependencies rclpy
-```
+cd src
+ros2 pkg create --build-type ament_python --license Apache-2.0 <package_name> --dependencies rclpy
+````
+Type for a **CMake package**:
+```shell
+cd src
+ros2 pkg create --build-type ament_cmake --license Apache-2.0 <package_name> --dependencies rclcpp
+````
+In our case we have created a python package:
+````shell
+ros2 pkg create --build-type ament_python --license Apache-2.0 ros2_tutorial --dependencies rclpy
+````
 >the <package_dependencies> are the names of other ROS2 packages that your package depends on.
 
 Now you have to build the created ws:
@@ -80,80 +92,53 @@ ROS2 nodes are:
 **Create first ROS2 Program**
 
 You can create a program based on two nodes:
-- A Publisher node that publish a string message "Hello world" to a "/pub_topic" topic
-- A subscriber node that subscribes to "/pub_topic" and prints on the screen the read message.
+- A Publisher node (/talker) that publish a string message "Hello world" to a "/chatter" topic
+- A subscriber node (/listener) that subscribes to "/chatter" topic and prints on the screen the read message.
+
+![](./Images/02_ROS2_tutorial/01_PubSub.png)
 
 Each node is created within a python program in "src/ros2_tutorial/ros2_tutorial" folder:
-- "publisher_hello.py": creates a simple_publisher node
-- "subscriber_hello.py": creates a simple_subscriber node
+- "publisher_hello.py": creates a talker node
+- "subscriber_hello.py": creates a listener node
 
 You can create Publisher and Subscriber python files using speciffic templates.
 
-Next step is to generate an executable from the python scripts you created:
-- In "setup.cfg": you will specify where do you install the node (install/ros2_tutorial/lib/ros2_tutorial)
-- In the **setup.py**: file contains all the necessary instructions for properly compiling your package. To do that, you work with a dictionary named entry_points. 
-    - Inside it, you find an array called console_scripts.
+Before compilation we have to generate an **executable** from the python scripts you created:
+- In "setup.cfg": you will specify where do you install the node (install/ros2_tutorial/lib/ros2_tutorial). This is already done by default.
+- In the **setup.py**: you have to add entry points for Publisher and Subscriber executables
+    ```python
+    entry_points={
+        'console_scripts': [
+                'publisher_exec = ros2_tutorial.publisher_hello:main',
+                'subscriber_exec = ros2_tutorial.subscriber_hello:main',
+        ],
+    },
+    ```
+Compile inside ws: 
 
-    - Add entry points for Publisher and Subscriber
-    
-        Open setup.py and add the entry point for the publisher and subscriber nodes. The entry_points field should now look like this:
-        ```python
-        entry_points={
-            'console_scripts': [
-                    'publisher_node = ros2_tutorial.publisher_hello:main',
-                    'subscriber_node = ros2_tutorial.subscriber_hello:main',
-            ],
-        },
-        ```
-        You can see these lines as follows:    '<executable_name> = <package_name>.<script_name>:main'
-
-- Compile inside ws: 
-    ```shell
-    colcon build
-    ```
-- Run in a separate terminals:
-    ```shell
-    ros2 run ros2_tutorial publisher_node
-    ros2 run ros2_tutorial subscriber_node
-    ```
-- You can also run the nodes from the folder where the nodes are installed
-    ```shell
-    cd install/ros2_tutorial/lib/ros2_tutorial
-    ./publisher_node
-    ./subscriber_node
-    ```
+````shell
+colcon build
+````
+Run in a separate terminals:
+```shell
+ros2 run ros2_tutorial publisher_node
+ros2 run ros2_tutorial subscriber_node
+```
+You can also run the nodes from the folder where the nodes are installed
+```shell
+cd install/ros2_tutorial/lib/ros2_tutorial
+./publisher_node
+./subscriber_node
+```
 Take into account that, the name of:
 - the python file (publisher_hello.py)
-- the node (simple_publisher)
-- the executable (publisher_node)
+- the node (talker)
+- the executable (publisher_exec)
 
 Could be different!!
 
-**Debug and monitor nodes**
-
-You have different functions to debug and monitor:
-- ros2 node -h
-- ros2 node list
-- ros2 node info /node
-
-You can run a node with a different name:
-- ros2 run pkg node --ros-args --remap __node:=abc
-
-You can compile a speciffic package and launch not the executable but the python file in src (we do not need to compile every time we make a change in the python file!):
-- colcon build --packages-select ros2_tutorial --symlink-install
-
-Rqt and rqt_graph tools
-
-You can practice with Turtlesim_node
-```shell
-ros2 run turtlesim turtlesim_node
-ros2 run turtlesim turtle_teleop_key
-ros2 run turtlesim turtlesim_node --ros-args -r __node:=my_turtle
-```
-
 ## **3. Create Launch files**
- Usually we create a "robot_bringup" package to locate the launch files. These launch files can take nodes from all other packages. We will create this package in the next section when we will work in a real robot project. For this first tutorial, we will use the same package to add some launch files.
- 
+
 ROS2 programs can be run:
 - from executable files
 - from launch files. 
@@ -162,11 +147,11 @@ When using executable files, we need one terminal to run each node.
 
 To make easier this process using a unique terminal to launch multiple nodes, we will use launch files.
 
-The launch system in ROS 2 is responsible for helping the user describe the configuration of their system and then execute it as described. Launch files written in Python, XML, or YAML can start and stop different nodes as well as trigger and act on various events. 
+ Launch files written in Python or XML. They can start and stop different nodes as well as trigger and act on various events. 
 
 To create a launch file we have to:
 - create a "launch" folder in "src/ros2_tutorial/"
-- Inside create the launch file in different formats (python, XML or YAML)
+- Inside create the launch file in different formats (python, XML)
 - Enable the execution of all files in "launch" folder. For that you have to open "setup.py" file and make some modifications to:
     - Import some libraries
     ```shell
@@ -181,7 +166,7 @@ To create a launch file we have to:
 
 **Writting launch files**
 
-Launch files can be written in python, XML or YAML formats. We show here the same lauch file in the 3 different formats.
+Launch files can be written in python or XML formats. We show here the same lauch file in the 2 different formats.
 - Launch file in Python format: "hello_pub_sub.launch.py" file
 ```python
 from launch import LaunchDescription
@@ -191,11 +176,11 @@ def generate_launch_description():
     return LaunchDescription([
         Node(
             package='ros2_tutorial',
-            executable='publisher_node',
+            executable='publisher_exec',
             output='screen'),
         Node(
             package='ros2_tutorial',
-            executable='subscriber_node',
+            executable='subscriber_exec',
             output='screen'),
     ])
 ```
@@ -206,8 +191,8 @@ ros2 launch ros2_tutorial hello_pub_sub.launch.py
 - Launch file in XML format: "hello_pub_sub.xml" file
 ```xml
 <launch>
-<node pkg="ros2_tutorial" exec="publisher_node"/>
-<node pkg="ros2_tutorial" exec="subscriber_node"/>
+<node pkg="ros2_tutorial" exec="publisher_exec"/>
+<node pkg="ros2_tutorial" exec="subscriber_exec"/>
 </launch>
 ```
 See documentation: https://docs.ros.org/en/humble/How-To-Guides/Launch-files-migration-guide.html
@@ -215,23 +200,6 @@ See documentation: https://docs.ros.org/en/humble/How-To-Guides/Launch-files-mig
 Now you can execute the launch file:
 ```shell
 ros2 launch ros2_tutorial hello_pub_sub.xml
-```
-- Launch file in YAML format: "hello_pub_sub.yaml" file
-```yaml
-launch:
-
-- node:
-    pkg: "ros2_tutorial"
-    exec: "publisher_node"
-    name: "simple_publisher"
-- node:
-    pkg: "ros2_tutorial"
-    exec: "subscriber_node"
-    name: "simple_subscriber"
-```
-Now you can execute the launch file:
-```shell
-ros2 launch ros2_tutorial hello_pub_sub.yaml
 ```
 
 **Exercise:**

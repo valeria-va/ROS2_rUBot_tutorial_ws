@@ -173,6 +173,8 @@ ros2 topic list
 ros2 service list
 ros2 action list
 ````
+![](./Images/01_ROS2_setup/08_turtlesim_node.png)
+
 To see the **information about the nodes, topics and messages**, type:
 
 ```shell
