@@ -1,6 +1,6 @@
 # **ROS2 tutorial**
 
-Installation will be made using Docker
+The objective of this section is to learn how to ceate a Package to perform a specific project and the needed nodes to give the desired functionality to the robot.
 
 Bibliography:
 - RO2 Humble official doc: https://docs.ros.org/en/humble/
@@ -24,17 +24,11 @@ Every **Python package** will have the following structure of files and folders:
 
 - setup.cfg - File that defines where the scripts will be installed.
 
-- /<package_name> - This directory will always have the same name as your package. You will put all your Python scripts inside this folder. Note that it already contains an empty __init__.py file.
+- /<package_name> - This directory will always have the same name as your package. You will put all your Python scripts inside this folder. Note that it already contains an empty "__init__.py" file.
 
-Some packages might contain extra folders. For instance, the launch folder contains the package's launch files 
+Some packages might contain extra folders. For instance, the launch folder that contains the package's launch files 
 
-We wil use the "ROS2_rUBot_tutorial_ws" as starting workspace for this project.
 
-You open a terminal in this Container using VS Code:
-```shell
-cd /home
-git clone https://github.com/manelpuig/ROS2_rUBot_tutorial_ws
-```
 **Create a new package**
 
 Every time you want to create a package, you have to be in this directory src. Type into your Webshell the following command:
@@ -50,25 +44,12 @@ Now you have to build the created ws:
 cd /home/ROS2_rUBot_tutorial_ws
 colcon build
 ```
-In ROS2 Humble some errors/warnings arise:
-- warnings related to "SetuptoolsDeprecationWarning: setup.py install is deprecated". Install setup tools version 58.2.0 (last version to work with ros2 python packages without any warnings)
-
-We have to downgrade the setuptools version to 58.2.0:
-```shell
-sudo apt install python3-pip
-pip3 list | grep setuptools
-pip3 install setuptools==58.2.0
-```
-- If warnings related to CMAKE_PREFIX_PATH, AMENT_PREFIX_PATH environment variables non existing values, reset them with:
-   - export AMENT_PREFIX_PATH=""
-   - export CMAKE_PREFIX_PATH=""
-
-Source the workspace. Be sure in .bashrc (with docker is from root) file to have:
+Source the workspace. Be sure in .bashrc file to have:
 ```shell
 source /opt/ros/humble/setup.bash 
 source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
-cd /home/ROS2_rUBot_tutorial_ws
 source /home/ROS2_rUBot_tutorial_ws/install/setup.bash
+cd /home/ROS2_rUBot_tutorial_ws
 ```
 You are ready to work with this workspace
 

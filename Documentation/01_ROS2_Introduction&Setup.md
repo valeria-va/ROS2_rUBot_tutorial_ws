@@ -70,30 +70,46 @@ In that case, you can follow the instructions:
 
 - Fork the "ROS2_rUBot_tutorial_ws" repository from my github
   ![](./Images/01_ROS2_setup/07_fork.png)
-- Open your ROS Noetic environment:  https://app.theconstructsim.com/
+- Open your ROS2 Humble environment:  https://app.theconstructsim.com/
 - Clone your forked directory in your home directory of container
   ```shell
   cd /home/user
-  git clone https://github.com/your_username/rUBot_tutorial_ws
-  cd rUBot_tutorial_ws
-  catkin_make
+  git clone https://github.com/your_username/ROS2_rUBot_tutorial_ws
+  cd ROS2_rUBot_tutorial_ws
+  colcon build
   ```
+- If the compilation process returns warnings on "Deprecated setup tools". Install setup tools version 58.2.0 (last version to work with ros2 python packages without any warnings):
+    ````shell
+    sudo apt install python3-pip
+    pip3 list | grep setuptools
+    pip3 install setuptools==58.2.0
+    ````
+- If the compilation process returns wardings on PREFIX_PATH:
+    ````shell
+    unset COLCON_PREFIX_PATH
+    unset AMENT_PREFIX_PATH
+    unset CMAKE_PREFIX_PATH
+    cd ~/ROS2_rUBot_mecanum_ws
+    rm -rf build/ install/ log/
+    colcon build
+    ````
 - Open .bashrc file (from user) with VS Code (open file...)
-- Ensure that you have the last 2 lines (review the exact name of your repository):
-
-  ```xml
-  source /opt/ros/noetic/setup.bash
-  source /home/user/rUBot_tutorial_ws/devel/setup.bash
-  ```
+- Add the lines (review the exact name of your repository):
+    ```xml
+    source /opt/ros/humble/setup.bash
+    source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
+    source /home/user/ROS2_rUBot_mecanum_ws/install/setup.bash
+    cd /home/user/ROS2_rUBot_mecanum_ws
+    ```
 You are ready to work with your repository for this session!
 
-# **3. Repository syncronisation**
+**Repository syncronisation**
 
-The objective is to update the changes you have made, when working in ROS environment, in your github repository.
+The objective is to update the changes you have made, when working in ROS2 environment, in your github repository.
 
 - Access to the TheConstruct environment local repository:
   ````shell
-  cd /home/user/rUBot_tutorial_ws
+  cd /home/user/ROS2_rUBot_tutorial_ws
   ````
 - Update the local repository with possible changes in github origin repository
   ````shell
@@ -104,15 +120,18 @@ The objective is to update the changes you have made, when working in ROS enviro
   ````shell
   git add .
   git commit -m "Message"
-  git push
   ````
-- When you will Push them, the first time you will be asked to link the repository to your github account:
+- When you will Push them, you will be asked to link the repository to your github account:
 - Open a terminal in and type the first time:
   ```shell
   git config --global user.email "mail@alumnes.ub.edu"
   git config --global user.name "your github username"
   ```
-- for succesive times, you only need to select changes, Commit a message and Push
+- Commit a message and Push
+    ````shell
+    git commit -m "Message"
+    git push
+    ````
 - You will have to specify the Username and Password (Personal Access Token you have generated)
 
 To obtain the **PAT** in github follow the instructions:
@@ -130,8 +149,6 @@ To obtain the **PAT** in github follow the instructions:
 
 Your github origin repository has been updated!
 
-
-
 ## **Practice ROS2 with Turtlesim**
 
 In this section we will practice the ROS2 concepts with a very simple and useful turtlesim robot.
@@ -139,7 +156,7 @@ In this section we will practice the ROS2 concepts with a very simple and useful
 Documentation:
 - https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Introducing-Turtlesim/Introducing-Turtlesim.html
 
-## **Turtlesim environment**
+**Turtlesim environment**
 
 Turtlesim is a package that contains a 2D turtle robot simulation and is a good opportunity to start working with ROS2.
 
@@ -147,21 +164,7 @@ We will start turtlesim node with:
 ```shell
 ros2 run turtlesim turtlesim_node
 ```
-![](./Images/02_ROS2_tutorial/01_turtlesim.png)
-
-We can verify the nodes:
-```shell
-ros2 node list
-```
-We will start another node to control the turtlesim robot
-```shell
-ros2 run turtlesim turtle_teleop_key
-```
-Now you will run a new node to control the turtle in the first node:
-````shell
-ros2 run turtlesim turtle_teleop_key
-````
-Use the arrow keys on your keyboard to control the turtle. It will move around the screen, using its attached “pen” to draw the path it followed so far.
+![](./Images/01_ROS2_setup/08_turtlesim.png)
 
 You can see the nodes, and their associated topics, services, and actions:
 ````shell
@@ -170,17 +173,49 @@ ros2 topic list
 ros2 service list
 ros2 action list
 ````
-Use rqt to play with the tuertlesim robots:
-````shell
-rqt
-````
-When running rqt for the first time, the window will be blank. No worries; just select Plugins > Services > Service Caller from the menu bar at the top.
-Let’s use rqt to call the /spawn service. You can guess from its name that /spawn will create another turtle in the turtlesim window.
+To see the **information about the nodes, topics and messages**, type:
 
-## **Turtlesim “Catch Them All” project**
+```shell
+ros2 node info /turtlesim
+ros2 topic info /turtle1/cmd_vel
+ros2 topic info /turtle1/pose
+```
+In order **to see the message structure**, type:
+```shell
+ros2 interface show geometry_msgs/Twist.msg
+ros2 interface show turtlesim/Pose.msg 
+```
+you can also find the message structure in google: "geometry_msgs/Twist"
 
-Time to start your first complete project with ROS2!
+In order **to write a message to a topic** we have different options:
+- we can **publish directly to the topic**: for exemple to publish a Twist type message with a rate of 1Hz to define a circle, type:
 
-For this project you will use the Turtlesim package as a simulation tool, so you can visualize what the robot is doing.
+```shell
+ros2 topic pub -r 1 /turtle1/cmd_vel geometry_msgs/Twist '[2, 0, 0]' '[0, 0, 2]'
+```
 
-Make sure you've watched the previous video to see what you'll get at the end of this project.
+![](./Images/01_ROS2_setup/09_turtlesim_pub.png)
+
+- or we will start another node to control the turtlesim robot:
+```shell
+ros2 run turtlesim turtle_teleop_key
+```
+![](./Images/01_ROS2_setup/10_turtlesim_key.png)
+
+Use the arrow keys on your keyboard to control the turtle. It will move around the screen, using its attached “pen” to draw the path it followed so far.
+
+In order **to listen a message from a topic**:
+```shell
+ros2 topic echo /turtle1/pose
+ros2 topic echo /turtle1/cmd_vel
+```
+
+We can use "rqt_graph" and "rqt_plot" to se the nodes-topics structure and the message values
+
+```shell
+rqt_graph
+rqt_plot
+```
+
+![](./Images/01_ROS2_setup/11_turtlesim_rqt.png)
+
