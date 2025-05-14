@@ -18,16 +18,17 @@ In ROS2, you can create two types of packages: Python packages and CMake (C++) p
 
 Every **Python package** will have the following structure of files and folders:
 
-- package.xml - File containing meta-information about the package (maintainer of the package, dependencies, etc.).
-- setup.py - File containing instructions for how to compile the package: define the executables, install the extra folders, etc
-- setup.cfg - File that defines where the scripts will be installed.
-- /<package_name> - This directory will always have the same name as your package. You will put all your Python scripts inside this folder. Note that it already contains an empty "__init__.py" file.
+- package.xml: File containing meta-information about the package (maintainer of the package, dependencies, etc.).
+- setup.py: File containing instructions for how to compile the package: define the executables, install the extra folders, etc
+- setup.cfg: File that defines where the scripts will be installed.
+- /<package_name>: This directory will always have the same name as your package. You will put all your Python scripts inside this folder. Note that it already contains an empty "__init__.py" file.
+- /resource/<package_name>: stores essential information that ROS 2 uses to understand and manage the package.
 
 Every **CMake package** will have the following structure of files and folders:
-- CMakeLists.txt file that describes how to build the code within the package (i.e. install the extra folders, etc)
-- include/<package_name> directory containing the public headers for the package
-- package.xml file containing meta information about the package (maintainer of the package, dependencies, etc.).
-- src directory containing the source code for the package
+- CMakeLists.txt: file that describes how to build the code within the package (i.e. install the extra folders, etc)
+- include/<package_name>: directory containing the public headers for the package
+- package.xml: file containing meta information about the package (maintainer of the package, dependencies, etc.).
+- src: directory containing the source code for the package
 
 Some packages might contain extra folders. For instance, the launch folder that contains the package's launch files 
 
@@ -35,12 +36,12 @@ Some packages might contain extra folders. For instance, the launch folder that 
 
 Every time you want to create a package, you have to be in the src directory 
 
-Type for a **python package**:
+Type to create a **python package**:
 ```shell
 cd src
 ros2 pkg create --build-type ament_python --license Apache-2.0 <package_name> --dependencies rclpy
 ````
-Type for a **CMake package**:
+Type to create a **CMake package**:
 ```shell
 cd src
 ros2 pkg create --build-type ament_cmake --license Apache-2.0 <package_name> --dependencies rclcpp
@@ -82,9 +83,9 @@ colcon build --packages-select ros2_tutorial --symlink-install
 ```
 
 ## **2. ROS2 Nodes**
-In ROS2, each node should be responsible for a single module (e.g., one node for controlling wheel motors, one for controlling a LIDAR control, etc.). Each node can communicate with other nodes through different methods.
+In ROS2, each node should be responsible for a single module (e.g., one node for controlling wheel motors, one for controlling a LIDAR control, etc.). Each node can communicate with other nodes publishing or subscribing messages from topics.
 
-A full robotic system is comprised of many nodes working together. In ROS2, a single executable (a C++ or Python program, etc.) can contain one node.
+A full robotic system is comprised of many nodes working together. In ROS2, a single executable (a C++ or Python program, etc.) is needed to create a node.
 ROS2 nodes are:
 - Subprograms in your application, responsible for only one thing
 - communicate with each other through topics, services and parameters
@@ -104,7 +105,7 @@ Each node is created within a python program in "src/ros2_tutorial/ros2_tutorial
 You can create Publisher and Subscriber python files using speciffic templates.
 
 Before compilation we have to generate an **executable** from the python scripts you created:
-- In "setup.cfg": you will specify where do you install the node (install/ros2_tutorial/lib/ros2_tutorial). This is already done by default.
+- In "setup.cfg": is specified where do you install the node (install/ros2_tutorial/lib/ros2_tutorial). This is already done by default.
 - In the **setup.py**: you have to add entry points for Publisher and Subscriber executables
     ```python
     entry_points={
