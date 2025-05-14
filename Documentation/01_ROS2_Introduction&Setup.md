@@ -28,23 +28,27 @@ ROS2 is a very good choice.
 
 **The Origin of ROS**
 
-ROS originated in 2007 at Stanford University's Stanford AI Laboratory (SAIL) as part of the Stanford Artificial Intelligence Robot (STAIR) project. Later, development transitioned to Willow Garage. ROS 2 was developed to address limitations in ROS 1, particularly concerning real-time performance, multi-robot systems, and production-level deployments. It leverages the Data Distribution Service (DDS) for its middleware.
+ROS originated in 2007 at Stanford University's in Stanford AI Laboratory (SAIL) as part of the Stanford Artificial Intelligence Robot (STAIR) project. Later, development transitioned to Willow Garage. 
+
+ROS 2 was developed to address limitations in ROS 1, particularly concerning real-time performance, multi-robot systems, and production-level deployments.
 
 **Why is it Useful?**
 
 ROS 2 provides numerous benefits for robotics development:
 
-- Hardware Abstraction: Enables code portability across different robot hardware.
-- Code Reusability: Facilitates the use of existing ROS packages and libraries.
-- Modularity: Encourages the development of modular and maintainable code.
+- Hardware Abstraction: Enables to be used in different robot hardware (PC, Arduino board, mobile phone, etc.).
+- Code Reusability: Facilitates the use of existing ROS packages and libraries from 3rd parties.
+- Modularity: Enables the development of modular and maintainable code.
 - Community Support: Offers access to a large and active community.
 - Production Readiness: Designed for robust and reliable deployments.
-- Middleware Flexibility: DDS provides robust and scalable communication.
+- Robustness in terms of communication.
 - Development Tools: Includes tools for visualization, debugging, and data logging (e.g., Rviz, ros2 bag).
 
 **How it Works**
 
-ROS 2 operates through a network of nodes that communicate using messages. Here's a basic overview:
+ROS 2 operates through a network of nodes that communicate using messages. A big project can be structured in a group of different nodes, each node contains a functionality and shares information with other nodes.
+
+Here's a basic overview:
 ![](./Images/01_ROS2_setup/04_nodes.gif)
 - Nodes: Independent processes that perform specific tasks.
 - Topics: Named communication channels where nodes publish and subscribe to messages.
@@ -121,11 +125,11 @@ The objective is to update the changes you have made, when working in ROS2 envir
   git add .
   git commit -m "Message"
   ````
-- When you will Push them, you will be asked to link the repository to your github account:
+- When Commit them, you will be asked to link the repository to your github account:
 - Open a terminal in and type the first time:
   ```shell
-  git config --global user.email "mail@alumnes.ub.edu"
-  git config --global user.name "your github username"
+  git config --global user.email "manel.puig@ub.edu"
+  git config --global user.name "manelpuig"
   ```
 - Commit a message and Push
     ````shell
