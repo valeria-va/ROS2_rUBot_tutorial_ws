@@ -102,8 +102,8 @@ In that case, you can follow the instructions:
     ```xml
     source /opt/ros/humble/setup.bash
     source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
-    source /home/user/ROS2_rUBot_mecanum_ws/install/setup.bash
-    cd /home/user/ROS2_rUBot_mecanum_ws
+    source /home/user/ROS2_rUBot_tutorial_ws/install/setup.bash
+    cd /home/user/ROS2_rUBot_tutorial_ws
     ```
 You are ready to work with your repository for this session!
 
@@ -142,7 +142,7 @@ To obtain the **PAT** in github follow the instructions:
 
   - Log in to GitHub
   - Go to Developer Settings
-  - Select Access Personal Access Tokens: Choose Tokens (classic)
+  - Select Personal Access Tokens: Choose Tokens (classic)
   - Click Generate new token (classic) and configure it:
     - Add a note to describe the purpose of the token, e.g., "ROS repo sync."
     - Set the expiration (e.g., 30 days, 60 days, or no expiration).
@@ -188,8 +188,8 @@ ros2 topic info /turtle1/pose
 ```
 In order **to see the message structure**, type:
 ```shell
-ros2 interface show geometry_msgs/Twist.msg
-ros2 interface show turtlesim/Pose.msg 
+ros2 interface show geometry_msgs/msg/Twist
+ros2 interface show turtlesim/msg/Pose 
 ```
 you can also find the message structure in google: "geometry_msgs/Twist"
 
@@ -197,7 +197,7 @@ In order **to write a message to a topic** we have different options:
 - we can **publish directly to the topic**: for exemple to publish a Twist type message with a rate of 1Hz to define a circle, type:
 
 ```shell
-ros2 topic pub -r 1 /turtle1/cmd_vel geometry_msgs/Twist '[2, 0, 0]' '[0, 0, 2]'
+ros2 topic pub -r 1 /turtle1/cmd_vel geometry_msgs/msg/Twist "{linear: {x: 2.0, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 2.0}}"
 ```
 
 ![](./Images/01_ROS2_setup/09_turtlesim_pub.png)

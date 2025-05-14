@@ -128,8 +128,8 @@ ros2 run ros2_tutorial subscriber_node
 You can also run the nodes from the folder where the nodes are installed
 ```shell
 cd install/ros2_tutorial/lib/ros2_tutorial
-./publisher_node
-./subscriber_node
+./publisher_exec
+./subscriber_exec
 ```
 Take into account that, the name of:
 - the python file (publisher_hello.py)
@@ -206,19 +206,4 @@ ros2 launch ros2_tutorial hello_pub_sub.xml
 **Exercise:**
 
 Make a ROS2 program based on 2 nodes:
-- A Publisher node that publish a INT32 number to a "/pub_topic" topic
-- A subscriber node that subscribes to "/pub_topic", multiplies this number by 2 and prints on the screen the resulting value.
-
-Construc the corresponding launch file to execute the program
-
-
-## **4.Client Libraries**
-ROS client libraries allow nodes written in various programming languages to communicate. A core ROS client library (RCL) implements the standard functionality needed by various ROS APIs. This makes it easier to write language-specific client libraries.
-
-The ROS2 team currently maintains the following client libraries:
-
-- rclcpp = C++ client library
-- rclpy = Python client library
-
-Additionally, other client libraries have been developed by the ROS community. You can find some more information in:
-https://docs.ros.org/en/humble/Concepts/About-ROS-2-Client-Libraries.html
+- A Publisher node 
