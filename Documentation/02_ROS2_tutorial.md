@@ -206,4 +206,4 @@ ros2 launch ros2_tutorial hello_pub_sub.xml
 **Exercise:**
 
 Make a ROS2 program based on 2 nodes:
-- A Publisher node 
+- A Publisher node2
