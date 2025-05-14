@@ -214,6 +214,5 @@ The program functionality will be based on 2 nodes:
 - A new "/move_turtle" node that:
     - subscribes to the "/turtle1/Pose" topic
     - Publish to the "/turtle1/cmd_vel" topic a message Twist
-    - if the running time is greater to 10s, the robot stops
-    - if the position in x direction of the robot is greater than 10m, the robot stops
+    - if the position in x or y direction of the robot is greater than 7m, the robot stops
 

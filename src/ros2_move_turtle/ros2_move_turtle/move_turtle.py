@@ -18,9 +18,9 @@ class MoveTurtleNode(Node):
             10)
         self.timer_period = 0.1  # seconds (10 Hz)
         self.timer = self.create_timer(self.timer_period, self.move_turtle)
-        self.linear_velocity = 1.0
+        self.linear_velocity = 0.2
         self.angular_velocity = 0.0
-        self.distance = 10.0
+        self.distance = 7.0
         self.vel_msg = Twist()
 
     def pose_callback(self, msg):

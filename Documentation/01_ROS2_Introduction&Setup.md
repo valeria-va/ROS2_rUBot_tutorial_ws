@@ -19,8 +19,7 @@ And the ROS2 reference sites:
 
 ROS1 is close to finish and you can switch to ROS2
 ![](./Images/01_ROS2_setup/01_ROS2_time.png)
-ROS2 structure is based on the architecture:
-![](./Images/01_ROS2_setup/02_ROS1_ROS2.png)
+
 The main differences are:
 ![](./Images/01_ROS2_setup/03_ROS2_dif.png)
 
