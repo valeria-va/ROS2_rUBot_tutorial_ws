@@ -47,8 +47,9 @@ ROS 2 provides numerous benefits for robotics development:
 
 ROS 2 operates through a network of nodes that communicate using messages. A big project can be structured in a group of different nodes, each node contains a functionality and shares information with other nodes.
 
-Here's a basic overview:
-![](./Images/01_ROS2_setup/04_nodes.gif)
+Here's a basic overview: Picture from ROS Official documentation: https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Topics/Understanding-ROS2-Topics.html
+![](./Images/01_ROS2_setup/04_Topic-MultiplePublisherandMultipleSubscriber.gif)
+  
 - Nodes: Independent processes that perform specific tasks.
 - Topics: Named communication channels where nodes publish and subscribe to messages.
 - Messages: Data structures defined in .msg files, used to exchange information.
@@ -68,16 +69,20 @@ You will have 2GB Virtual machine with Ubuntu 22 and ROS2 Humble installed for f
 
 **Prepare your Workspace**
 
-Once you are in the ROS2 Humble environment, you can use our repository and make your modifications according to the exercises we will propose you.
-In that case, you can follow the instructions:
+When working in Laboratory groups, we suggest you:
+- One student plays the role of `Director`. This student makes a "Fork" of the Professor's github project.
+- The `Director` accept the other students as `Collaborators`
+![](./Images/01_ROS2_setup/07_github_collaborators.png)
+- Then the `Collaborators` will make a "fork" of the `Director`'s github project.
+- The `Collaborators` will be able to update the github `Director`'s project and participate on the project generation
 
-- Fork the "ROS2_rUBot_tutorial_ws" repository from my github
-  ![](./Images/01_ROS2_setup/07_fork.png)
+To work on the project (during lab sessions or for homework at home), each student has to clone the `Director`'s github project in the `TheConstruct working environment`.
 - Open your ROS2 Humble environment:  https://app.theconstructsim.com/
-- Clone your forked directory in your home directory of container
+- Open your created ROS2_Humble Rosject project
+- Clone your forked `Director`'s github project
   ```shell
   cd /home/user
-  git clone https://github.com/your_username/ROS2_rUBot_tutorial_ws
+  git clone https://github.com/director_username/ROS2_rUBot_tutorial_ws
   cd ROS2_rUBot_tutorial_ws
   colcon build
   ```
@@ -125,10 +130,10 @@ The objective is to update the changes you have made, when working in ROS2 envir
   git commit -m "Message"
   ````
 - When Commit them, you will be asked to link the repository to your github account:
-- Open a terminal in and type the first time:
+- Open a terminal in and type your github credentials:
   ```shell
-  git config --global user.email "manel.puig@ub.edu"
-  git config --global user.name "manelpuig"
+  git config --global user.email "xxx@alumnes.ub.edu"
+  git config --global user.name "your_github_username"
   ```
 - Commit a message and Push
     ````shell
