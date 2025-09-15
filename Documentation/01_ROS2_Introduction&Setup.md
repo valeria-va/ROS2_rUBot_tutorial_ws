@@ -97,7 +97,7 @@ To work on the project (during lab sessions or for homework at home), each stude
     unset COLCON_PREFIX_PATH
     unset AMENT_PREFIX_PATH
     unset CMAKE_PREFIX_PATH
-    cd ~/ROS2_rUBot_mecanum_ws
+    cd ~/ROS2_rUBot_tutorial_ws
     rm -rf build/ install/ log/
     colcon build
     ````
@@ -108,7 +108,10 @@ To work on the project (during lab sessions or for homework at home), each stude
     source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
     source /home/user/ROS2_rUBot_tutorial_ws/install/setup.bash
     cd /home/user/ROS2_rUBot_tutorial_ws
+    git config --global user.email "xxx@alumnes.ub.edu"
+    git config --global user.name "your_github_username"
     ```
+    > Include the name an email you have used to create your github account
 You are ready to work with your repository for this session!
 
 **Repository syncronisation**
@@ -128,18 +131,8 @@ The objective is to update the changes you have made, when working in ROS2 envir
   ````shell
   git add .
   git commit -m "Message"
+  git push
   ````
-- When Commit them, you will be asked to link the repository to your github account:
-- Open a terminal in and type your github credentials:
-  ```shell
-  git config --global user.email "xxx@alumnes.ub.edu"
-  git config --global user.name "your_github_username"
-  ```
-- Commit a message and Push
-    ````shell
-    git commit -m "Message"
-    git push
-    ````
 - You will have to specify the Username and Password (Personal Access Token you have generated)
 
 To obtain the **PAT** in github follow the instructions:

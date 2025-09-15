@@ -122,8 +122,8 @@ colcon build
 ````
 Run in a separate terminals:
 ```shell
-ros2 run ros2_tutorial publisher_node
-ros2 run ros2_tutorial subscriber_node
+ros2 run ros2_tutorial publisher_exec
+ros2 run ros2_tutorial subscriber_exec
 ```
 You can also run the nodes from the folder where the nodes are installed
 ```shell
