@@ -16,7 +16,7 @@ class move_turtle(Node):
 		10
 		)
 		
-		def pose_callback(self, pose):
+	def pose_callback(self, pose):
 		twist = Twist()
 		
 		if pose.x > 7 or pose.y > 7:
@@ -25,7 +25,7 @@ class move_turtle(Node):
 		else:
 		twist.linear.x = 1.0
 		twist.angular.z = 0.0
-
+		
 		self.cmd_vel_publisher.publish(twist)
 
 def main(args=None):
