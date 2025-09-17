@@ -18,7 +18,6 @@ class MoveTurtle(Node):
 
     def pose_callback(self, pose_msg):
         twist = Twist()
-        # Tu regla: si la tortuga supera x>7 o y>7, se detiene
         if pose_msg.x > 7.0 or pose_msg.y > 7.0:
             twist.linear.x = 0.0
             twist.angular.z = 0.0
