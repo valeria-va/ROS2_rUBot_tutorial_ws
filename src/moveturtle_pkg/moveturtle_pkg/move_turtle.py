@@ -1,26 +1,32 @@
 import rclpy
 from rclpy.node import Node
+
 from geometry_msgs.msg import Twist
 from turtlesim.msg import Pose
 
 class MoveTurtle(Node):
-    def __init__(self):
-        super().__init__('monitor_and_move')
-        self.cmd_vel_publisher = self.create_publisher(
-            Twist, '/turtle1/cmd_vel', 10)
-        self.subscription = self.create_subscription(
-            Pose, '/turtle1/pose',
-            self.pose_callback, 10)
 
-    def pose_callback(self, pose):
+    def __init__(self):
+        super().__init__('move_turtle')
+        self.publisher_ = self.create_publisher(Twist, '/turtle1/cmd_vel', 10)
+        self.subscription = self.create_subscription(
+            Pose,
+            '/turtle1/pose',
+            self.pose_callback,
+            10
+        )
+
+    def pose_callback(self, pose_msg):
         twist = Twist()
-        if pose.x > 7 or pose.y > 7:
+        # Tu regla: si la tortuga supera x>7 o y>7, se detiene
+        if pose_msg.x > 7.0 or pose_msg.y > 7.0:
             twist.linear.x = 0.0
             twist.angular.z = 0.0
         else:
             twist.linear.x = 1.0
             twist.angular.z = 0.0
-        self.cmd_vel_publisher.publish(twist)
+        self.publisher_.publish(twist)
+        self.get_logger().info(f'Publishing: linear.x={twist.linear.x}')
 
 def main(args=None):
     rclpy.init(args=args)
