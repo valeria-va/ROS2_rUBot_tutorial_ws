@@ -11,4 +11,7 @@ def generate_launch_description():
             package='turtlesim',
             executable='turtlesim_node',
             output='screen'),
-    ])
+            arguments=['--ros-args', '--log-level', 'WARN'],
+            
+            ])
+
