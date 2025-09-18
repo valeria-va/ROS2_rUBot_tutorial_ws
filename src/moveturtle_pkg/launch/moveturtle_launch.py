@@ -10,9 +10,9 @@ def generate_launch_description():
         Node(
             package='turtlesim',
             executable='turtlesim_node',
-            output='screen',
-            arguments=['--ros-args', '--log-level', 'WARN'],)
+            output='screen',)
             
             ])
+
 
 
