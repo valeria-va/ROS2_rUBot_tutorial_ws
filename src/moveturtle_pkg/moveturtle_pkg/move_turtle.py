@@ -18,11 +18,11 @@ class MoveTurtle(Node):
 
     def pose_callback(self, pose_msg):
         twist = Twist()
-        if pose_msg.x > 7.0 or pose_msg.y > 7.0:
+        if abs(pose_msg.x) >= 7.0 or abs(pose_msg.y) >= 7.0:            
             twist.linear.x = 0.0
             twist.angular.z = 0.0
         else:
-            twist.linear.x = 1.0
+            twist.linear.x = 0.2
             twist.angular.z = 0.0
         self.publisher_.publish(twist)
         self.get_logger().info(f'Publishing: linear.x={twist.linear.x}')
